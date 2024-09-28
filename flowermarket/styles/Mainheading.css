@@ -1,0 +1,188 @@
+#mainheading{
+  all:unset
+}
+
+
+
+@media screen and (min-width: 768px) {
+  @property --k {
+    syntax: "<number>";
+    initial-value: -1;
+    inherits: true;
+  }
+
+  #particle1 {
+    --a: -45deg;
+    --x: 53%;
+    --y: 15%;
+    --d: 4em;
+    --f: 0.7;
+    --t: 0.15;
+  }
+
+  #particle2 {
+    --a: 150deg;
+    --x: 40%;
+    --y: 70%;
+    --d: 7.5em;
+    --f: 0.8;
+    --t: 0.08;
+  }
+
+  #particle3 {
+    --a: 10deg;
+    --x: 90%;
+    --y: 65%;
+    --d: 7em;
+    --f: 0.6;
+    --t: 0.25;
+  }
+
+  #particle4 {
+    --a: -120deg;
+    --x: 15%;
+    --y: 10%;
+    --d: 4em;
+  }
+
+  #particle5 {
+    --a: -175deg;
+    --x: 10%;
+    --y: 25%;
+    --d: 5.25em;
+    --f: 0.6;
+    --t: 0.32;
+  }
+
+  #particle6 {
+    --a: -18deg;
+    --x: 80%;
+    --y: 25%;
+    --d: 4.75em;
+    --f: 0.5;
+    --t: 0.4;
+  }
+
+  #particle7 {
+    --a: -160deg;
+    --x: 30%;
+    --y: 5%;
+    --d: 9em;
+    --f: 0.9;
+    --t: 0.5;
+  }
+
+  #particle8 {
+    --a: 175deg;
+    --x: 9%;
+    --y: 30%;
+    --d: 6em;
+    --f: 0.95;
+    --t: 0.6;
+  }
+
+  #particle9 {
+    --a: -10deg;
+    --x: 89%;
+    --y: 25%;
+    --d: 4.5em;
+    --f: 0.55;
+    --t: 0.67;
+  }
+
+  #particle10 {
+    --a: -140deg;
+    --x: 40%;
+    --y: 10%;
+    --d: 5em;
+    --f: 0.85;
+    --t: 0.75;
+  }
+
+  #particle11 {
+    --a: 90deg;
+    --x: 45%;
+    --y: 65%;
+    --d: 4em;
+    --f: 0.5;
+    --t: 0.83;
+  }
+
+  #particle12 {
+    --a: 30deg;
+    --x: 70%;
+    --y: 80%;
+    --d: 6.5em;
+    --f: 0.75;
+    --t: 0.92;
+  }
+
+  #mainheading {
+    --m: 1;
+    grid-area: 2/1 / span 1 / span 2;
+    position: relative;
+    margin: 0em;
+    border: solid 0.1em transparent;
+    padding: 0.4em 1.2em;
+    border-radius: 5em;
+    box-shadow: inset 0 0 0.5px #23429e;
+    background: radial-gradient(#111a39, 67.5%, #3476da) padding-box,
+      radial-gradient(#a0c2ed, 35%, #a0c2ed00 70%) 50% 0/80% 50% repeat-y;
+    color: #f2fdfe;
+    font-variant: small-caps;
+    font: 800 0.6em/1 montserrat, sans-serif;
+  }
+
+  @keyframes k {
+    0%,
+    33.3% {
+      --k: 1;
+    }
+  }
+  .particle {
+    --f: 1;
+    --pos-k: max(0, var(--k));
+    --neg-k: max(0, -1 * var(--k));
+    --low-c: min(1, 4 * (1 - var(--pos-k)));
+    --abs-d: max(var(--neg-k) - 0.5, 0.5 - var(--neg-k));
+    --mov-f: var(--pos-k);
+    display: grid;
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    rotate: var(--a);
+    animation: k calc(var(--m) * 1s) linear calc(var(--m) * var(--t, 0) * 1s)
+      infinite;
+  }
+  @supports (scale: sqrt(4)) {
+    .particle {
+      --mov-f: sqrt(var(--pos-k));
+    }
+  }
+  .particle::before,
+  .particle::after {
+    grid-area: 1/1;
+    width: 0.75em;
+    aspect-ratio: 1;
+  }
+  .particle::before {
+    --sa: calc(min(1, 1 - 2 * min(0.5, var(--mov-f))) * 45deg);
+    border-radius: calc(1.25 * min(0.8, var(--mov-f)) * 50%) 50% 50%;
+    transform-origin: 0 0;
+    translate: calc(var(--mov-f) * var(--d));
+    rotate: -45deg;
+    scale: var(--f);
+    transform: skew(var(--sa), var(--sa));
+    opacity: var(--low-c);
+    filter: Saturate(var(--low-c));
+    background: radial-gradient(at 85% 85%, #bad9fa, #3e66a4 75%);
+    content: "";
+  }
+  .particle::after {
+    translate: -50% -50%;
+    scale: calc(var(--f) * (1 - 2 * var(--abs-d)));
+    text-align: center;
+    filter: blur(0.5px);
+    content: "✦";
+  }
+}
