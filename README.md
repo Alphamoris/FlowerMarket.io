@@ -2,7 +2,7 @@
 
   Frontend : Next js on top React , Typescript , Bootstrap5 
 
-  Backend : Yet to be completed
+  Backend : Python , FastAPI , OAuth2 , ORM
 
 Steps To setup the project on your local machine :
 
