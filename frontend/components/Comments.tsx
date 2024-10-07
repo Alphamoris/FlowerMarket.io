@@ -38,10 +38,10 @@ export default function Comments() {
                                             </div>
                                         </div>
                                         <div className="col-12 col-md-4">
-                                            <label htmlFor="website" className="form-label">Website</label>
+                                            <label htmlFor="website" className="form-label">Rating for 5</label>
                                             <div className="input-group">
                                                 <span className="input-group-text">
-                                                <i className="bi bi-globe2"></i>
+                                                <i className="bi bi-star-fill"></i>
                                                 </span>
                                                 <input type="url" className="form-control" id="website" />
                                             </div>

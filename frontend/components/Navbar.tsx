@@ -18,13 +18,6 @@ export default function Navbar() {
                             </Link>
                         </div>
                         <div className="text-center me-3">
-                            <Link href={"/market"}>
-                                <button className="btn navlinks" type="button" aria-label="shop">
-                                    <i className="bi bi-shop me-1"></i>Market
-                                </button>
-                            </Link>
-                        </div>
-                        <div className="text-center me-3">
                             <Link href={"/prices"}>
                                 <button className="btn navlinks" type="button" aria-label="profile">
                                     <i className="bi bi-currency-rupee"></i>Price
@@ -35,6 +28,13 @@ export default function Navbar() {
                             <Link href={"/types"}>
                                 <button className="btn navlinks" type="button" aria-label="profile">
                                     <i className="bi bi-flower3"></i>Types
+                                </button>
+                            </Link>
+                        </div>
+                        <div className="text-center me-3">
+                            <Link href={"/market"}>
+                                <button className="btn navlinks" type="button" aria-label="shop">
+                                    <i className="bi bi-shop me-1"></i>Market
                                 </button>
                             </Link>
                         </div>

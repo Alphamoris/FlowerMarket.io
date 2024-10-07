@@ -1,41 +1,54 @@
+"use client"
+
 import Prices from "@/components/Prices";
+import { get_price_details } from "@/apilib/priceapi";
+import React, { useEffect, useState } from "react";
+
+interface PriceDetail {
+  id: number;
+  shop_name: string;
+  date: Date;
+  time: string;
+  fname: string;
+  description: string;
+  price: number;
+  place: string;
+}
+
+interface PricePair {
+  detail1: PriceDetail;
+  detail2: PriceDetail | null;
+}
 
 
 export default function Home2() {
-    const prices: any = [{
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }
-    ]
+  const [pricePairs, setPricePairs] = useState<PricePair[]>([]);
 
-    return (
-        <>
-            <Prices PricesList={prices} />
-        </>
-    )
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const priceDetails: PriceDetail[] = await get_price_details();
+        const pairs: PricePair[] = [];
+
+        for (let i = 0; i < priceDetails.length; i += 2) {
+          pairs.push({
+            detail1: priceDetails[i],
+            detail2: priceDetails[i + 1] || null
+          });
+        }
+
+        setPricePairs(pairs);
+      } catch (error) {
+        console.error("Error fetching price details:", error);
+      }
+    };
+
+    fetchPrices();
+  }, []);
+
+  return (
+    <>
+      <Prices PriceList={pricePairs} />
+    </>
+  );
 }

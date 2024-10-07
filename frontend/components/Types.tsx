@@ -27,7 +27,7 @@ const Types: React.FC<Typeprops> = ({ Typeprops }) => {
                                 <div className=" pt-3 col-6 col-md-4 col-xl-2">
                                     <Link href={"/"}>
                                         <h2 className="d-flex flex-column align-items-center justify-content-center bg-body-secondary rounded display-6 p-3">
-                                            <Image src={element.imgurl} height={150} width={150} alt="Nothing"></Image>
+                                            <Image src={element.imgurl} layout="responsive" height={150} width={150} alt="Nothing"></Image>
                                             <span className="fs-7 text-body-secondary mt-2">{element.fname}</span>
                                         </h2>
                                     </Link>
