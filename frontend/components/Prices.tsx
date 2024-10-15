@@ -1,21 +1,7 @@
 import Link from "next/link";
 import React from "react";
+import { PricePair } from "@/interfaces/interfaces"
 
-interface PriceDetail {
-  id: number;
-  shop_name: string;
-  date: Date;
-  time: string;
-  fname: string;
-  description: string;
-  price: number;
-  place: string;
-}
-
-interface PricePair {
-  detail1: PriceDetail;
-  detail2: PriceDetail | null;
-}
 
 interface PricesProps {
   PriceList: PricePair[];

@@ -1,13 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import { TypesI } from "@/interfaces/interfaces"
 
 
 interface Typeprops {
-    Typeprops: {
-        imgurl: string,
-        fname: string
-    }[]
+    Typeprops: TypesI[]
 }
 
 const Types: React.FC<Typeprops> = ({ Typeprops }) => {
@@ -20,14 +18,14 @@ const Types: React.FC<Typeprops> = ({ Typeprops }) => {
                 <div className="container">
                     <div className="row gy-3">
                     {
-                        Typeprops.map((element) => (
+                        Typeprops.map((element , index) => (
                             <>
 
 
-                                <div className=" pt-3 col-6 col-md-4 col-xl-2">
+                                <div className=" pt-3 col-6 col-md-4 col-xl-2" key={index}>
                                     <Link href={"/"}>
                                         <h2 className="d-flex flex-column align-items-center justify-content-center bg-body-secondary rounded display-6 p-3">
-                                            <Image src={element.imgurl} layout="responsive" height={150} width={150} alt="Nothing"></Image>
+                                            <Image src="/pic1.png" layout="responsive" height={150} width={150} alt="Nothing"></Image>
                                             <span className="fs-7 text-body-secondary mt-2">{element.fname}</span>
                                         </h2>
                                     </Link>

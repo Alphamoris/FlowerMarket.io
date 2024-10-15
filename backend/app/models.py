@@ -27,7 +27,7 @@ class comments(Base):
 
     __tablename__ = "comments"
 
-    id = Column(Integer , primary_key=True)
+    id = Column(Integer , primary_key=True , autoincrement=True)
     name = Column(String , nullable=False)
     email = Column(String , nullable=False)
     rating = Column(Float , nullable=True)

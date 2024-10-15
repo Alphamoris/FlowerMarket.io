@@ -1,24 +1,10 @@
 "use client"
 
 import Prices from "@/components/Prices";
-import { get_price_details } from "@/apilib/priceapi";
+import { getPriceDetails } from "@/apilib/Apilib";
 import React, { useEffect, useState } from "react";
+import { PriceDetail , PricePair } from "@/interfaces/interfaces"
 
-interface PriceDetail {
-  id: number;
-  shop_name: string;
-  date: Date;
-  time: string;
-  fname: string;
-  description: string;
-  price: number;
-  place: string;
-}
-
-interface PricePair {
-  detail1: PriceDetail;
-  detail2: PriceDetail | null;
-}
 
 
 export default function Home2() {
@@ -27,7 +13,7 @@ export default function Home2() {
   useEffect(() => {
     const fetchPrices = async () => {
       try {
-        const priceDetails: PriceDetail[] = await get_price_details();
+        const priceDetails: PriceDetail[] = await getPriceDetails();
         const pairs: PricePair[] = [];
 
         for (let i = 0; i < priceDetails.length; i += 2) {

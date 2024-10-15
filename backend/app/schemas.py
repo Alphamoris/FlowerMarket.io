@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from datetime import date,time
 
 class details(BaseModel):
@@ -18,3 +18,10 @@ class price(BaseModel):
     description : str
     price : int
     place : str
+
+class comment(BaseModel):
+    id : int | None = None
+    name : str 
+    email : EmailStr
+    rating : float | None = None
+    comment : str
