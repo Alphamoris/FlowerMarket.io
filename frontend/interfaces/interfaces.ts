@@ -14,14 +14,27 @@ export interface PricePair {
     detail2: PriceDetail | null;
 }
 
-export interface TypesI{
-    id : number ;
-    fname : string ;
+export interface TypesI {
+    id: number;
+    fname: string;
 }
 
-export interface Comment{
-    name : string ;
-    email : string ;
-    rating : number ;
-    comment : string ;
+export interface Comment {
+    name: string;
+    email: string;
+    rating: number;
+    comment: string;
+}
+
+export interface SignUp {
+    fname: string;
+    emailid: string;
+    password: string;
+    lname: string
+    age: number;
+    contactno: number;
+    zipcode: number;
+    city: string;
+    state: string;
+    dob: string;
 }
