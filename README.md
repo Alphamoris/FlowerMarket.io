@@ -1,8 +1,8 @@
 📜📜📜The Tech stack for this FlowerMarket.io Project is 
 
-  Frontend : Next js on top React , Typescript , Bootstrap5 
+  Frontend : Next js on top of React , Typescript , Bootstrap5 
 
-  Backend : Python , FastAPI , OAuth2 , ORM
+  Backend : Python , FastAPI , OAuth2 , ORM , Postgres
 
 Steps To setup the project on your local machine :
 
