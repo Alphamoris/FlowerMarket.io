@@ -1,6 +1,9 @@
+from fastapi import HTTPException , status
 from sqlalchemy.orm import Session
-from .models import types , price , comments
-from .schemas import details , comment
+from pydantic import EmailStr
+from .models import types , price , comments , user
+from .schemas import details , comment , User , UserCrd
+from .Oauth2 import hashpassword , verify
 
 # def get_flowers(db:Session , id : int ):
 #     return (db.query(flower).filter(flower.id == id).first())
@@ -22,7 +25,7 @@ def give_all_price( db:Session ):
 
 
 def give_all_types(db:Session):
-    return (db.query(types).limit(8).all())
+    return (db.query(types).all())
 
 def get_comments(db:Session , cdetail : comment ):
     data = comments(id=cdetail.id,name=cdetail.name,
@@ -31,4 +34,19 @@ def get_comments(db:Session , cdetail : comment ):
     db.commit()
     db.refresh(data)
     return ({"msg" : "Comment Received Successfully!!!"})
+
+def new_user( db : Session , new_user : User):
+    new_user.password = hashpassword(new_user.password)
+    print(new_user)
+    data = user(**(dict(new_user)))
+    db.add(data)
+    db.commit()
+    db.refresh(data)
+    return ({"msg" : "New User Received Successfully!!!"})
     
+def get_user( db : Session , username : str , password : str ):
+    data = (db.query(user.emailid,user.password).filter(user.emailid == username).first())
+    if (verify(password,data.password)):
+        return True
+    else:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail=f"Invalid Credentials")

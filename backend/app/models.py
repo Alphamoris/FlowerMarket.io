@@ -1,4 +1,4 @@
-from sqlalchemy import Column , ForeignKey , Integer , String ,Time , Date , func , Float
+from sqlalchemy import Column , ForeignKey , Integer, BIGINT , String ,Time , Date , func , Float
 from sqlalchemy.orm import relationship
 from .database import Base
 
@@ -35,7 +35,7 @@ class comments(Base):
 
 class user(Base):
 
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id = Column(Integer , primary_key=True , autoincrement=True)
     fname = Column(String , unique=True , nullable=False)
@@ -43,8 +43,8 @@ class user(Base):
     password = Column(String , unique=True , nullable=False , index=True)
     lname = Column(String , nullable=True)
     age = Column(Integer , nullable=False)
-    contactno = Column(Integer , nullable=False)
-    zipcode = Column(Integer , nullable=False)
+    contactno = Column(BIGINT , nullable=False)
+    zipcode = Column(BIGINT  , nullable=False)
     city = Column(String , nullable=True)
     state = Column(String , nullable=True)
     dob = Column(Date , nullable=False)

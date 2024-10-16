@@ -2,16 +2,17 @@ from fastapi import Depends , FastAPI , HTTPException
 from sqlalchemy.orm import Session
 from typing import List , Annotated
 from fastapi.middleware.cors import CORSMiddleware 
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer , OAuth2PasswordRequestForm
 
-from .crud import give_all_price , give_all_types , get_comments
-from .schemas import details , price ,comment
+from .crud import give_all_price , get_user , give_all_types , get_comments , new_user
+from .schemas import details , price ,comment , User , UserCrd , Token
 from .database import SessionLocal , engine
+from .Oauth2 import create_token
 
 
 app = FastAPI()
 
-oauth2 = OAuth2PasswordBearer("token")
+oauth2 = OAuth2PasswordBearer(tokenUrl="token")
 
 origins = [
     "http://localhost:3000",  
@@ -52,6 +53,22 @@ def comments(comment : comment , db : Session = Depends(get_db)):
 @app.get("/get/types" , response_model= List[details])
 def gettypes( db : Session = Depends(get_db)):
     return (give_all_types(db = db))
+
+
+
+@app.post("/signup")
+def signup( user : User , db : Session = Depends(get_db)):
+    msg = new_user(db = db , new_user = user )
+    return msg
+
+
+@app.post("/get/user" )
+def getuser( credentials : Annotated[OAuth2PasswordRequestForm , Depends()], db : Session = Depends(get_db)) -> Token:
+    data = get_user( db = db , username= credentials.username , password= credentials.password)
+    if data:
+        tok = create_token(data={"user" : credentials.username})
+        return Token(access_token = tok , token_type = "bearer")
+    return data
 
 # @app.post("/post" )
 # def setting(detail : price , db : Session = Depends(get_db)):

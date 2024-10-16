@@ -19,9 +19,44 @@ class price(BaseModel):
     price : int
     place : str
 
+    class Cofig:
+        orm_mode = True
+
 class comment(BaseModel):
     id : int | None = None
     name : str 
     email : EmailStr
     rating : float | None = None
     comment : str
+
+    class Cofig:
+        orm_mode = True
+
+
+class UserCrd(BaseModel):
+    password : str
+    emailid : EmailStr
+
+
+class Token(BaseModel):
+    access_token : str 
+    token_type : str
+    class Cofig:
+        orm_mode = True
+
+class User(UserCrd):
+    id : int | None = None
+    fname : str
+    lname : str
+    age : int
+    contactno : int 
+    zipcode : int 
+    city : str
+    state : str
+    dob : date
+
+    class Cofig:
+        orm_mode = True
+
+
+

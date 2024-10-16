@@ -1,2 +1,4 @@
 sqlalchemy
 alembic
+passlib[bcrypt]
+pyjwt
