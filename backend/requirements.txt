@@ -2,3 +2,5 @@ sqlalchemy
 alembic
 passlib[bcrypt]
 pyjwt
+pydantic-settings
+python-dotenv

@@ -1,15 +1,25 @@
+import jwt
 from passlib.context import CryptContext
 from datetime import timedelta , datetime , timezone
-import jwt
+from jwt.exceptions import InvalidTokenError 
+from pydantic import EmailStr
+from typing import Annotated 
+from fastapi import Depends , HTTPException , status
+from fastapi.security import OAuth2PasswordBearer
 
-from .schemas import Token , UserCrd
+from .schemas import TokenData , Settings
+
+setting = Settings()
 
 
-SECRET_KEY = "7d86917ba82149e01fa6dd04dfc17fda7b3d902b6f9d774d2237a0603f89cfaf"
-ALGORITHM = "HS256"
-EXPIRATION_TIME = 20
+SECRET_KEY = setting.secret_key
+ALGORITHM = setting.algorithm
+EXPIRATION_TIME = int(setting.expiration_time)
 
+Oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 pwd_context = CryptContext(schemes=["bcrypt"] , deprecated="auto")
+
+
 
 
 def create_token( data : dict , token_validity : timedelta | None = None):
@@ -25,8 +35,38 @@ def create_token( data : dict , token_validity : timedelta | None = None):
 
 
 
+
+def verify_access_token(token : str , credentials_exception) -> TokenData:
+    
+    try:
+        payload = jwt.decode(token , SECRET_KEY , algorithms= [ALGORITHM])
+        useremailid : EmailStr = payload.get("user")
+        token_data = TokenData(emailid=useremailid)
+        if useremailid is None : 
+            raise credentials_exception
+    
+    except InvalidTokenError:
+        raise credentials_exception
+    
+    return token_data
+
+
+
+
+
+def get_current_user(token : Annotated[str , Depends(Oauth2_scheme)]):
+    credentials_exception = HTTPException(status_code=status.HTTP_401_UNAUTHORIZED 
+                           , detail="Could not validate your credentials",
+                           headers={"WWW-Authenticate" : "Bearer"})
+    return verify_access_token(token ,credentials_exception)
+
+
+
+
 def hashpassword(password):
     return pwd_context.hash(password)
+
+
 
 
 def verify(plain_password : str , hashed_password : str ):
