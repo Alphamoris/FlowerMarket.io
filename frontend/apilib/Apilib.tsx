@@ -1,5 +1,4 @@
-import { Comment, PriceDetail, TypesI, SignUp } from "@/interfaces/interfaces"
-
+import { Comment, PriceDetail, TypesI, SignUp, UserCrd, Token } from "@/interfaces/interfaces"
 
 
 
@@ -74,32 +73,75 @@ export const setComments = async (details: Comment): Promise<any> => {
 
 
 
-// export const signUp = async (details: SignUp): Promise<any> => {
-//     try {
+export const signUp = async (details: SignUp): Promise<any> => {
+    try {
 
-//         const data = await fetch("http://127.0.0.1:8000/signup/",
-//             {
-//                 method: "POST",
-//                 next: {
-//                     revalidate: 60
-//                 },
-//                 headers: {
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: {
-//                     fname: details.fname,
-//                     emailid: details.emailid,
-//                     password: details.password,
-//                     lname: details.lname,
-//                     age: details.age,
-//                     contactno: details.contactno,
-//                     zipcode: details.zipcode,
-//                     city: details.city,
-//                     state: details.state,
-//                     dob: details.dob
+        const data = await fetch("http://127.0.0.1:8000/signup",
+            {
+                method: "POST",
+                next: {
+                    revalidate: 60
+                },
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fname: details.fname,
+                    emailid: details.emailid,
+                    password: details.password,
+                    lname: details.lname,
+                    age: details.age,
+                    contactno: details.contactno,
+                    zipcode: details.zipcode,
+                    city: details.city,
+                    state: details.state,
+                    dob: details.dob
 
-//                 }
-//             }
-//         )
-//     }
-// }
+                })
+            }
+
+        )
+        if (!data.ok) {
+            throw new Error("Failed To Upload Your Credentials")
+        }
+
+        return await data.json()
+    }
+
+    catch (error) {
+        console.log("Error from signup apilib :", error)
+        return []
+    }
+}
+
+
+export const login = async (credentials: UserCrd): Promise<Token> => {
+    const formData = new FormData()
+    formData.append("username", credentials.username)
+    formData.append("password", credentials.password)
+    try {
+
+        const data = await fetch("http://127.0.0.1:8000/login", {
+            method: "POST",
+            next: { revalidate: 60 },
+            body: formData
+        })
+
+
+        if (!data.ok) {
+            console.log("The Error is from login :", data.status)
+            throw new Error("An Error Ocuured in Login")
+        }
+        return await data.json()
+    }
+
+    catch (error) {
+        console.error("Error uploading comments:", error);
+        return {
+            tokentype: "",
+            accesstoken: ""
+        };
+    }
+
+
+}

@@ -6,55 +6,95 @@ export default function SignupPage() {
 
     const [data, setData] = useState<SignUp>({
         fname: "",
-        emailid: "",
-        password: "",
         lname: "",
-        age: 0 ,
+        age: 0,
         contactno: 0,
         zipcode: 0,
         city: "",
         state: "",
         dob: "",
+        emailid: "",
+        password: "",
+
     })
 
-    const [isSubmitting,setIsSubmitting] = useState<boolean>(false)
-    const [submitResult,setSubmitResult] = useState<string | null>(null)
+    const [date, setDate] = useState<string[]>([])
+    const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+    const [submitResult, setSubmitResult] = useState<string | null>(null)
+    const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
 
-    const handleSubmit = async ( e : React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
         setIsSubmitting(true)
+        setData(prev => ({ ...prev, "dob": date[2] + "-" + date[1] + "-" + date[0] }))
 
-        try{
+        try {
 
             const response = await signUp(data)
             setSubmitResult(response)
+            setSubmitSuccess(true)
+
 
         }
 
-        catch(error){
-            console.log("The error is due to " , error)
+        catch (error) {
+            console.log("The error is due to ", error)
             throw new Error("Uploading the records failed")
         }
 
-        finally{
+        finally {
             setIsSubmitting(false)
+            setData({
+                fname: "",
+                lname: "",
+                age: 0,
+                contactno: 0,
+                zipcode: 0,
+                city: "",
+                state: "",
+                dob: "",
+                emailid: "",
+                password: "",
+            })
         }
 
     }
 
 
-    const handlechange = ( e : React.ChangeEvent<HTMLInputElement> ) => {
+    const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
-        const { name , value } = e.target
-        setData(prev => ({...prev , [name] : name === "age" || "contactno" || "zipcode" ? Number(value) : value }))
+        const { name, value } = e.target
+        setData(prev => ({ ...prev, [name]: name === "age" || name === "contactno" || name === "zipcode" ? Number(value) : value }))
 
+    }
+
+    const handledobchange = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const { name, value } = e.target
+        setDate(prev => {
+            const newDate = [...prev]
+            switch (name) {
+                case "date":
+                    newDate[0] = value
+                    break
+                case "month":
+                    newDate[1] = value
+                    break
+                case "year":
+                    newDate[2] = value
+                    break
+            }
+            return newDate
+        })
     }
     return (
         <>
-            <button className="btn btn-outline-primary fs-6 btn-lg me-2 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
-                <i className="bi bi-person-circle me-2"></i>Signup
-            </button>
+            {!submitSuccess &&
+                <button className="btn btn-outline-primary fs-6 btn-lg me-2 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                    <i className="bi bi-person-circle me-2"></i>Signup
+                </button>
+            }
             <form onSubmit={handleSubmit}>
                 <div className="modal fade" id="exampleModalToggle" aria-hidden="true" tabIndex={-1}>
                     <div className="modal-dialog modal-md modal-dialog-centered">
@@ -66,30 +106,30 @@ export default function SignupPage() {
                                 <div className="input-group input-group-prefix mb-3 mt-3">
                                     <span className="input-group-text">Name</span>
                                     <div className="form-floating">
-                                        <input type="text" className="form-control" placeholder="FirstName" name="fname" onChange={handlechange} value={data.fname}/>
+                                        <input type="text" className="form-control" placeholder="FirstName" name="fname" onChange={handlechange} value={data.fname} />
                                         <label>FirstName</label>
                                     </div>
                                     <div className="form-floating">
-                                        <input type="text" className="form-control" placeholder="LastName" name="lname" onChange={handlechange} value={data.lname}/>
+                                        <input type="text" className="form-control" placeholder="LastName" name="lname" onChange={handlechange} value={data.lname} />
                                         <label>LastName</label>
                                     </div>
                                 </div>
                                 <div className="row">
                                     <div className="col-3">
                                         <div className="form-floating mb-3">
-                                            <input type="number" className="form-control" placeholder="Age" min={5} max={150} name="age" onChange={handlechange} value={data.age}/>
+                                            <input type="number" className="form-control" placeholder="Age" min={5} max={150} name="age" onChange={handlechange} value={data.age} />
                                             <label>Age</label>
                                         </div>
                                     </div>
                                     <div className="col">
                                         <div className="form-floating mb-3">
-                                            <input type="tel" className="form-control" placeholder="Contact No" name="conatactno" onChange={handlechange} value={data.contactno}/>
+                                            <input type="number" className="form-control" placeholder="Contact No" name="contactno" onChange={handlechange} value={data.contactno} />
                                             <label>Contact No</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-floating mb-3">
-                                    <input type="email" className="form-control" placeholder="Email ID" name="emailid" onChange={handlechange} value={data.emailid}/>
+                                    <input type="email" className="form-control" placeholder="Email ID" name="emailid" onChange={handlechange} value={data.emailid} />
                                     <label >Email ID</label>
                                 </div>
                                 <div className="row g-3 mb-3">
@@ -107,7 +147,7 @@ export default function SignupPage() {
                                     </div>
                                     <div className="col-sm">
                                         <div className="form-floating">
-                                            <input type="number" className="form-control" placeholder="Zip Code" name="zipcode" onChange={handlechange} value={data.zipcode} />
+                                            <input type="number" className="form-control" min={0} placeholder="Zip Code" name="zipcode" onChange={handlechange} value={data.zipcode} />
                                             <label>Zip Code</label>
                                         </div>
                                     </div>
@@ -132,15 +172,15 @@ export default function SignupPage() {
                                 <div className="input-group input-group-prefix mb-3">
                                     <span className="input-group-text">Date Of Birth</span>
                                     <div className="form-floating">
-                                        <input type="text" className="form-control" placeholder="Date" name="dob" onChange={handlechange} value={data.dob} />
+                                        <input type="text" className="form-control" placeholder="Date" name="date" onChange={handledobchange} value={date[0]} />
                                         <label>Date</label>
                                     </div>
                                     <div className="form-floating">
-                                        <input type="text" className="form-control" placeholder="Month" />
+                                        <input type="text" className="form-control" placeholder="Month" name="month" onChange={handledobchange} value={date[1]} />
                                         <label>Month</label>
                                     </div>
                                     <div className="form-floating">
-                                        <input type="text" className="form-control" placeholder="Year" />
+                                        <input type="text" className="form-control" placeholder="Year" name="year" onChange={handledobchange} value={date[2]} />
                                         <label>Year</label>
                                     </div>
                                 </div>
@@ -149,10 +189,12 @@ export default function SignupPage() {
                                     <label>Password</label>
                                 </div>
                                 <div className="form-floating">
-                                    <input type="password" className="form-control" placeholder="Confirm Password" />
+                                    <input type="password" className="form-control" placeholder="Confirm Password" name="password" onChange={handlechange} value={data.password} />
                                     <label>Confirm Password</label>
                                 </div>
                             </div>
+                            {isSubmitting && <p className="text-center">Loading<i className="bi bi-arrow-repeat"></i></p>}
+                            {submitSuccess && <p className="text-center bg-body-secondary fs-5">New User Registered <i className="bi bi-check2-circle"></i></p>}
                             <div className="modal-footer">
                                 <button className="btn btn-secondary me-2" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
                                     Previous

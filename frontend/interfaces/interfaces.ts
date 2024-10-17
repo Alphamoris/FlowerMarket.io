@@ -38,3 +38,15 @@ export interface SignUp {
     state: string;
     dob: string;
 }
+
+
+export interface Token{
+    accesstoken : string ;
+    tokentype : string
+}
+
+
+export interface UserCrd{
+    username : string ;
+    password : string 
+}

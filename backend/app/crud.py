@@ -43,7 +43,7 @@ def new_user( db : Session , new_user : User):
     db.add(data)
     db.commit()
     db.refresh(data)
-    return ({"msg" : "New User Received Successfully!!!"})
+    return ("New User Added Successfully!!!")
 
 
 

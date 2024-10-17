@@ -38,7 +38,7 @@ class user(Base):
     __tablename__ = "users"
 
     id = Column(Integer , primary_key=True , autoincrement=True)
-    fname = Column(String , unique=True , nullable=False)
+    fname = Column(String , nullable=False)
     emailid = Column(String , unique=True , nullable=False , index=True)
     password = Column(String , unique=True , nullable=False , index=True)
     lname = Column(String , nullable=True)

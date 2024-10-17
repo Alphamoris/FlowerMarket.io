@@ -46,6 +46,7 @@ class Token(BaseModel):
     class Cofig:
         orm_mode = True
 
+
 class User(UserCrd):
     id : int | None = None
     fname : str
