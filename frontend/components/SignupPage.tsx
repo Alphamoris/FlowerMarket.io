@@ -1,8 +1,14 @@
 import React, { use, useState } from "react"
 import { SignUp } from "@/interfaces/interfaces"
 import { signUp } from "@/apilib/Apilib"
+import { useAuth } from "./AuthContext"
+
+
+
 
 export default function SignupPage() {
+
+    const { isLoggedIn } = useAuth()
 
     const [data, setData] = useState<SignUp>({
         fname: "",
@@ -31,6 +37,7 @@ export default function SignupPage() {
 
         try {
 
+        
             const response = await signUp(data)
             setSubmitResult(response)
             setSubmitSuccess(true)
@@ -43,21 +50,22 @@ export default function SignupPage() {
             throw new Error("Uploading the records failed")
         }
 
-        finally {
-            setIsSubmitting(false)
-            setData({
-                fname: "",
-                lname: "",
-                age: 0,
-                contactno: 0,
-                zipcode: 0,
-                city: "",
-                state: "",
-                dob: "",
-                emailid: "",
-                password: "",
-            })
-        }
+        // finally {
+        //     setIsSubmitting(false)
+        //     setData({
+        //         fname: "",
+        //         lname: "",
+        //         age: 0,
+        //         contactno: 0,
+        //         zipcode: 0,
+        //         city: "",
+        //         state: "",
+        //         dob: "",
+        //         emailid: "",
+        //         password: "",
+        //     })
+        //     setDate([])
+        // }
 
     }
 
@@ -90,7 +98,7 @@ export default function SignupPage() {
     }
     return (
         <>
-            {!submitSuccess &&
+            {!isLoggedIn &&
                 <button className="btn btn-outline-primary fs-6 btn-lg me-2 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                     <i className="bi bi-person-circle me-2"></i>Signup
                 </button>
@@ -101,6 +109,7 @@ export default function SignupPage() {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalToggleLabel">Enter Your Details ---- <i className="bi bi-1-circle-fill fs-5"></i></h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="input-group input-group-prefix mb-3 mt-3">
@@ -167,6 +176,7 @@ export default function SignupPage() {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title " id="exampleModalToggleLabel2">Enter Your Details ---- <i className="bi bi-2-circle-fill fs-5"></i> </h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <div className="input-group input-group-prefix mb-3">

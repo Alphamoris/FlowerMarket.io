@@ -4,24 +4,26 @@ import Image from "next/image";
 import Loginpage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Mainheading from "./Mainheading";
+import Logout from "./Logout";
 import { useState } from "react";
+import { AuthProvider } from "./AuthContext";
 
 
 
 export default function Uppernavbar() {
-    
-    
-    const [loginstatus,setloginstatus] = useState<Boolean>(true)
+
+
+    const [loginstatus, setloginstatus] = useState<Boolean>(true)
     const onclick1 = () => {
         const variable = document.querySelector("#offcanvasWithBothOptions")
-        variable?.setAttribute("class","offcanvas offcanvas-start bg-dark-subtle hide")
+        variable?.setAttribute("class", "offcanvas offcanvas-start bg-dark-subtle hide")
     }
 
-    
+
 
     return (
         <>
-        
+
             <nav className="navbar navbar-expand-lg navbar-light bg-light border border-bottom border-black w-100 unavclr">
                 <button
                     className="btn btn-outline-dark ms-2 mt-1"
@@ -34,24 +36,27 @@ export default function Uppernavbar() {
                 </button>
                 <a className="navbar-brand" href="#" aria-label="link">
                     <Image src="/logo.png" alt="Logo" width="25" height="25" className="d-inline-block align-text-center ms-3 me-1" />
-                   <Mainheading />
+                    <Mainheading />
                 </a>
                 <div className="d-flex ms-auto">
                     <Link href={"/help/contactus"}>
-                    <button className="btn btn-outline-dark me-2" type="button" aria-label="telephone" title="Contact US">
-                        <i className="bi bi-telephone"></i>
-                    </button>
+                        <button className="btn btn-outline-dark me-2" type="button" aria-label="telephone" title="Contact US">
+                            <i className="bi bi-telephone"></i>
+                        </button>
                     </Link>
-                    <Loginpage />
-                    <SignupPage />
+                    <AuthProvider>
+                        <Loginpage />
+                        <SignupPage />
+                        <Logout />
+                    </AuthProvider>
                 </div>
             </nav>
 
             <div
-            
+
                 className="offcanvas offcanvas-start bg-dark-subtle"
                 data-bs-scroll="true"
-                data-bs-backdrop = "false"
+                data-bs-backdrop="false"
                 id="offcanvasWithBothOptions"
                 aria-labelledby="offcanvasWithBothOptionsLabel">
                 <div className="offcanvas-header">
@@ -65,9 +70,9 @@ export default function Uppernavbar() {
                 </div>
                 <div className="offcanvas-body ">
                     {loginstatus && (
-                    <Link href="/">
-                        <span className="badge bi-arrow-down-right-circle text-bg-secondary fs-6 my-4 col-12">
-                            Please Login</span></Link>
+                        <Link href="/">
+                            <span className="badge bi-arrow-down-right-circle text-bg-secondary fs-6 my-4 col-12">
+                                Please Login</span></Link>
                     )}
                     <Link href="/market" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Markets</Link>
                     <Link href="/seller" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Sellers</Link>

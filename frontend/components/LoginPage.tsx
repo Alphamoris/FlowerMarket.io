@@ -1,6 +1,7 @@
 import { Token, UserCrd } from "@/interfaces/interfaces"
 import React, { useState } from "react"
 import { login } from "@/apilib/Apilib"
+import { useAuth } from './AuthContext';
 
 
 const Loginpage = () => {
@@ -13,17 +14,19 @@ const Loginpage = () => {
 
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
+    const { setIsLoggedIn , isLoggedIn } = useAuth();
 
+    
     const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
-        console.log("dsdds")
         setIsSubmitting(true)
 
         try {
             const reponse = await login(data)
             console.log("The Token is : ", reponse)
             setSubmitSuccess(true)
+            setIsLoggedIn(true)
         }
         catch (error) {
             console.log("The error is from login :", error)
@@ -43,14 +46,14 @@ const Loginpage = () => {
     const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
         const { name, value } = e.target
-        setData(prev => ({ ...prev, [name]: [value] }))
+        setData(prev => ({ ...prev, [name]: value }))
     }
 
 
 
     return (
         <>
-        {!submitSuccess && 
+        {!isLoggedIn && 
             <button className="btn btn-outline-primary fs-6 btn-lg me-2 " type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop1">
                 <i className="bi bi-box-arrow-in-right me-2"></i>Login
             </button>}

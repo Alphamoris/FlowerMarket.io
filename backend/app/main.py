@@ -34,7 +34,7 @@ def initial():
 
 
 @app.get("/get/price" , response_model=List[price])
-def getting( db:Session = Depends(get_db), emailid : str = Depends(get_current_user)):
+def getting( db:Session = Depends(get_db)):
     data = give_all_price( db = db )
     return data
 
@@ -49,7 +49,7 @@ def comments(comment : comment , db : Session = Depends(get_db)):
 
 
 @app.get("/get/types" , response_model= List[details])
-def gettypes( db : Session = Depends(get_db) , emailid : str = Depends(get_current_user)):
+def gettypes( db : Session = Depends(get_db)):
     return (give_all_types(db = db))
 
 

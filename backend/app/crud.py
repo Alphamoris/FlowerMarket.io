@@ -38,7 +38,6 @@ def get_comments(db:Session , cdetail : comment ):
 
 def new_user( db : Session , new_user : User):
     new_user.password = hashpassword(new_user.password)
-    print(new_user)
     data = user(**(dict(new_user)))
     db.add(data)
     db.commit()
