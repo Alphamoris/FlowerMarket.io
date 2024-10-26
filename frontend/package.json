@@ -11,7 +11,7 @@
   "dependencies": {
     "@fontsource/nerko-one": "^5.0.21",
     "@fontsource/protest-guerrilla": "^5.0.3",
-    "@next/font": "^14.2.8",
+    "lucide-react": "^0.453.0",
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18"

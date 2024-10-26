@@ -7,6 +7,8 @@ import Mainheading from "./Mainheading";
 import Logout from "./Logout";
 import { useState } from "react";
 import { AuthProvider } from "./AuthContext";
+import LoginToast from "./LoginToast";
+import CommentToast from "./CommentToast";
 
 
 
@@ -48,6 +50,7 @@ export default function Uppernavbar() {
                         <Loginpage />
                         <SignupPage />
                         <Logout />
+                        <CommentToast />
                     </AuthProvider>
                 </div>
             </nav>

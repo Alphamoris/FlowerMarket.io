@@ -1,4 +1,3 @@
-import ContactPage from "@/components/ContactPage";
 import Navbar from "../components/Navbar"
 import Uppernavbar from "../components/Uppernavbar"
 import "../styles/mainstyle.css"
