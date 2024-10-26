@@ -3,9 +3,19 @@
 import React, { useState } from 'react';
 import { Star, Heart , ShoppingCart, ArrowRight } from 'lucide-react';
 
-const ProductPage = () => {
+interface getId{
+    id : number ;
+}
+
+const ProductPage : React.FC<getId> = ({ id }) => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  console.log(id)
+  console.log(id)
+  console.log(id)
+  console.log(id)
+  console.log(id)
+  console.log(id)
 
   const images = [
     "/pic1.png",
@@ -29,7 +39,7 @@ const ProductPage = () => {
   ];
 
   return (
-    <div className="container py-5">
+    <div className="container py-5" key={id}>
       {/* Breadcrumb */}
       <nav className="mb-4">
         <ol className="breadcrumb">

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { PricePair } from "@/interfaces/interfaces"
+import ProductPage from "./ProductPage";
 
 
 interface PricesProps {
@@ -8,10 +9,16 @@ interface PricesProps {
 }
 
 const Prices: React.FC<PricesProps> = ({ PriceList }) => {
+
+  const handleClick = ( id : number , event : React.MouseEvent ) => {
+
+    <ProductPage id={id} />
+    event.stopPropagation()
+  }
   return (
     <div className="border-1 border-black border-top pricesclr">
       {PriceList.map((element, index) => (
-        <div className="row row-cols-1 row-cols-md-2" key={index}>
+        <div className="row row-cols-1 row-cols-md-2" key={index} onClick={(event) => handleClick(element.detail1.id , event)}>
           <div className="col">
             <div className="card m-3 border border-5 rounded-4" id="pricescard">
               <div className="card-header d-flex align-items-center">
