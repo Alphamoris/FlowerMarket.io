@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react';
-import { Star, Heart, Share2, Search, ShoppingCart, ArrowRight } from 'lucide-react';
+import { Star, Heart , ShoppingCart, ArrowRight } from 'lucide-react';
 
 const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
