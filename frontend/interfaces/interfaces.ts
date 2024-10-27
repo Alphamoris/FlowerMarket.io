@@ -50,3 +50,7 @@ export interface UserCrd{
     username : string ;
     password : string 
 }
+
+export interface Id{
+    id : number;
+}

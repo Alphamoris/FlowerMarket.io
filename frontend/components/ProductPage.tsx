@@ -2,21 +2,25 @@
 
 import React, { useState } from 'react';
 import { Star, Heart , ShoppingCart, ArrowRight } from 'lucide-react';
+import { PriceDetail } from '@/interfaces/interfaces';
+import { detailsById, getalluserid } from '@/apilib/Apilib';
 
-interface getId{
-    id : number ;
+
+
+const ProductPage : React.FC<PriceDetail> = ( details ) => {
+
+  interface Props {
+    params: {
+        id: string | number
+    }
 }
 
-const ProductPage : React.FC<getId> = ({ id }) => {
+
+  console.log(details)
+  console.log(details)
+  console.log(details)
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  console.log(id)
-  console.log(id)
-  console.log(id)
-  console.log(id)
-  console.log(id)
-  console.log(id)
-
   const images = [
     "/pic1.png",
     "/pic1.png",
@@ -38,8 +42,11 @@ const ProductPage : React.FC<getId> = ({ id }) => {
     { label: "Manufacturing", value: "Handmade in Italy" }
   ];
 
+
+
   return (
-    <div className="container py-5" key={id}>
+
+    <div className="container py-5" key={details.id}>
       {/* Breadcrumb */}
       <nav className="mb-4">
         <ol className="breadcrumb">
@@ -219,5 +226,52 @@ const ProductPage : React.FC<getId> = ({ id }) => {
     </div>
   );
 };
+
+export async function getStaticPaths() {
+  try {
+    const productIds = await getalluserid();
+    const paths = productIds.map((id) => ({
+      params: { id: id.toString() }
+    }));
+
+    return {
+      paths,
+      fallback: true // Enable ISR
+    };
+  } catch (error) {
+    console.error('Error generating paths:', error);
+    return {
+      paths: [],
+      fallback: true
+    };
+  }
+}
+
+// export async function getStaticProps({ params }) {
+//   try {
+//     const details = await detailsById(params.id);
+    
+//     if (!details) {
+//       return {
+//         notFound: true
+//       };
+//     }
+
+//     return {
+//       props: {
+//         details,
+//       },
+//       revalidate: 3600 // Revalidate every hour
+//     };
+//   } catch (error) {
+//     console.error('Error fetching product:', error);
+//     return {
+//       props: {
+//         error: 'Failed to load product'
+//       },
+//       revalidate: 60 // Retry sooner if there was an error
+//     };
+//   }
+// }
 
 export default ProductPage;

@@ -70,6 +70,9 @@
   border: none;
 }
 
+.loader{
+  min-height: 70vh;
+}
 
 .marketheading {
   color: #0049b7;

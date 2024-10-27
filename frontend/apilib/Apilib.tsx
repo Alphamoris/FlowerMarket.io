@@ -1,4 +1,4 @@
-import { Comment, PriceDetail, TypesI, SignUp, UserCrd, Token } from "@/interfaces/interfaces"
+import { Comment, Id , PriceDetail, TypesI, SignUp, UserCrd, Token } from "@/interfaces/interfaces"
 
 
 
@@ -143,5 +143,55 @@ export const login = async (credentials: UserCrd): Promise<Token> => {
         };
     }
 
+
+}
+
+
+export const getalluserid = async () : Promise<Id[]> => {
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8000/price/id" , {
+            method : "GET" ,
+            next: { revalidate: 60 },
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching types details:", error);
+        return [];
+    }
+
+}
+
+
+export const detailsById = async ( id : number ) : Promise<PriceDetail | any> => {
+
+    try{
+
+        const response = await fetch("http://127.0.0.1:8000/details/by/id?id=" + `${id}` , {
+            method : "GET" ,
+            next: { revalidate: 60 },
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching types details:", error);
+        return [];
+    }
 
 }

@@ -13,27 +13,28 @@ import SignupPage from "@/components/SignupPage";
 import Types from "@/components/Types";
 import LocationComponent from "@/components/LocationComponent";
 import Map from "@/components/Map"
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 
 
 export default function Home() {
-  let dummyarr:any=[
-    {imgurl:"/pic1.png" , name:"Jasmine"},{imgurl:"/pic1.png" , name:"Jasmine"},
-    {imgurl:"/pic1.png" , name:"Jasmine"},{imgurl:"/pic1.png" , name:"Jasmine"},
-    {imgurl:"/pic1.png" , name:"Jasmine"},{imgurl:"/pic1.png" , name:"Jasmine"},
-    {imgurl:"/pic1.png" , name:"Jasmine"},{imgurl:"/pic1.png" , name:"Jasmine"},
-    {imgurl:"/pic1.png" , name:"Jasmine"},{imgurl:"/pic1.png" , name:"Jasmine"}
+  let dummyarr: any = [
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" }
   ]
   return (
     <>
       <main>
-      <Badges dummyarr={dummyarr}/>
+        <Badges dummyarr={dummyarr} />
         <Carousel />
         <Achievements />
         <Service />
         <Faqs />
         <Comments />
-        
+
       </main>
     </>
   );
