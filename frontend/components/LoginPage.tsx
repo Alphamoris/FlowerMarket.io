@@ -2,6 +2,7 @@ import { Token, UserCrd } from "@/interfaces/interfaces"
 import React, { useState } from "react"
 import { login } from "@/apilib/Apilib"
 import { useAuth } from './AuthContext';
+import { MessageSquareWarning } from "lucide-react";
 
 
 const Loginpage = () => {
@@ -12,6 +13,7 @@ const Loginpage = () => {
         password: ""
     })
 
+    const [ errorState , setErrorState ] = useState<boolean>(false)
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const { setIsLoggedIn , isLoggedIn } = useAuth();
@@ -23,10 +25,18 @@ const Loginpage = () => {
         setIsSubmitting(true)
 
         try {
-            const reponse = await login(data)
-            console.log("The Token is : ", reponse)
-            setSubmitSuccess(true)
-            setIsLoggedIn(true)
+            const response = await login(data)
+            console.log("The Token is : ", response)
+            if(response == false){
+                setIsLoggedIn(false)
+                setSubmitSuccess(false)
+                setErrorState(true)
+            }
+            else{
+                setIsLoggedIn(true)
+                setSubmitSuccess(true)
+                setErrorState(false)
+            }
         }
         catch (error) {
             console.log("The error is from login :", error)
@@ -84,7 +94,7 @@ const Loginpage = () => {
 
                                 {isSubmitting && <p className="text-center">Loading<i className="bi bi-arrow-repeat"></i></p>}
                                 {submitSuccess && <p className="text-center bg-body-secondary fs-5">Successfully Logged in <i className="bi bi-check2-circle"></i></p>}
-
+                                {errorState && <p className="text-center bg-body-secondary fs-5">Please Enter Valid Credentials<MessageSquareWarning/> </p> }
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" className="btn btn-primary">Submit</button>

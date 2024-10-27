@@ -110,12 +110,12 @@ export const signUp = async (details: SignUp): Promise<any> => {
 
     catch (error) {
         console.log("Error from signup apilib :", error)
-        return []
+        return false
     }
 }
 
 
-export const login = async (credentials: UserCrd): Promise<Token> => {
+export const login = async (credentials: UserCrd): Promise<Token | boolean> => {
     const formData = new FormData()
     formData.append("username", credentials.username)
     formData.append("password", credentials.password)
@@ -130,7 +130,7 @@ export const login = async (credentials: UserCrd): Promise<Token> => {
 
         if (!data.ok) {
             console.log("The Error is from login :", data.status)
-            throw new Error("An Error Ocuured in Login")
+            return false
         }
         return await data.json()
     }

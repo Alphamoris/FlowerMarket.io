@@ -2,6 +2,7 @@ import React, { use, useState } from "react"
 import { SignUp } from "@/interfaces/interfaces"
 import { signUp } from "@/apilib/Apilib"
 import { useAuth } from "./AuthContext"
+import { MessageSquareWarning } from "lucide-react";
 
 
 
@@ -28,20 +29,31 @@ export default function SignupPage() {
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
     const [submitResult, setSubmitResult] = useState<string | null>(null)
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
+    const [isError , setIsError ] = useState<boolean>(false)
 
+
+    async function waitFor(time : number, callback : Function) {
+        setTimeout(() => {
+            callback();
+        }, time);
+    }
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
         e.preventDefault()
         setIsSubmitting(true)
-        setData(prev => ({ ...prev, "dob": date[2] + "-" + date[1] + "-" + date[0] }))
-
+        const formattedDob = `${date[2]}-${date[1]}-${date[0]}`;
+        const newData = { ...data, dob: formattedDob };
         try {
 
-        
-            const response = await signUp(data)
+            console.log(data)
+            const response = await signUp(newData)
+            if(response == false){
+                setIsError(true)
+            }
+            else{
             setSubmitResult(response)
             setSubmitSuccess(true)
-
+            }
 
         }
 
@@ -50,22 +62,22 @@ export default function SignupPage() {
             throw new Error("Uploading the records failed")
         }
 
-        // finally {
-        //     setIsSubmitting(false)
-        //     setData({
-        //         fname: "",
-        //         lname: "",
-        //         age: 0,
-        //         contactno: 0,
-        //         zipcode: 0,
-        //         city: "",
-        //         state: "",
-        //         dob: "",
-        //         emailid: "",
-        //         password: "",
-        //     })
-        //     setDate([])
-        // }
+        finally {
+            setIsSubmitting(false)
+            setData({
+                fname: "",
+                lname: "",
+                age: 0,
+                contactno: 0,
+                zipcode: 0,
+                city: "",
+                state: "",
+                dob: "",
+                emailid: "",
+                password: "",
+            })
+            setDate([])
+        }
 
     }
 
@@ -98,7 +110,8 @@ export default function SignupPage() {
     }
     return (
         <>
-            {!isLoggedIn &&
+        
+            {!isLoggedIn && !submitSuccess &&
                 <button className="btn btn-outline-primary fs-6 btn-lg me-2 " type="button" data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
                     <i className="bi bi-person-circle me-2"></i>Signup
                 </button>
@@ -205,6 +218,7 @@ export default function SignupPage() {
                             </div>
                             {isSubmitting && <p className="text-center">Loading<i className="bi bi-arrow-repeat"></i></p>}
                             {submitSuccess && <p className="text-center bg-body-secondary fs-5">New User Registered <i className="bi bi-check2-circle"></i></p>}
+                            {isError && <p className="text-center bg-body-secondary fs-5"><MessageSquareWarning/>Already a user exits with given credentials <i className="bi bi-check2-circle"></i></p>}
                             <div className="modal-footer">
                                 <button className="btn btn-secondary me-2" type="button" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">
                                     Previous
@@ -220,5 +234,6 @@ export default function SignupPage() {
         </>
     )
 }
+
 
 

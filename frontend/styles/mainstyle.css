@@ -74,6 +74,12 @@
   min-height: 70vh;
 }
 
+
+.checkoutprogress{
+  width : 1% ;
+}
+
+
 .marketheading {
   color: #0049b7;
   font-variant: small-caps;

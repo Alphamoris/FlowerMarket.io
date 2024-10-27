@@ -1,8 +1,12 @@
+"use client"
 import Prices from "@/components/Prices"
+import { PriceDetail, PricePair } from "@/interfaces/interfaces"
+import { useState } from "react"
 
-export default function Home8(){
+export default function Home8() {
 
-    const prices: any = [{
+
+    const prices = [{
         imgurl: "/pic1.png",
         fname: "Jasmine",
         content: "These are super fresh flowers from urban areas of india",
@@ -32,12 +36,13 @@ export default function Home8(){
         time: "04:20 AM"
     }
     ]
+    
 
-    return(
+    return (
 
         <>
-        <Prices PricesList={prices} />
-        
+            <h1>under Construction!!!</h1>
+
         </>
     )
 }

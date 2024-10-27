@@ -16,9 +16,6 @@ const ProductPage : React.FC<PriceDetail> = ( details ) => {
 }
 
 
-  console.log(details)
-  console.log(details)
-  console.log(details)
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const images = [
