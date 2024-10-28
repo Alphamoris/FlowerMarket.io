@@ -1,34 +1,31 @@
 "use client"
 import Types from "@/components/Types";
-import { useState, useEffect } from "react";
-import { TypesI } from "@/interfaces/interfaces";
-import { getTypesDetails } from "@/apilib/Apilib";
-import { error } from "console";
+import { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { AuthProvider } from "@/components/AuthContext";
 
 
 export default function Home5() {
 
-    const [data, setdata] = useState<TypesI[]>([])
-
-    useEffect(() => {
-        const Fetch_data = async () => {
-            try {
-                const result: TypesI[] = await getTypesDetails()
-                setdata(result)
-            }
-            catch (error) {
-                console.log("The Error is :", error)
-                setdata([])
-            }
-        }
-        Fetch_data()
-    }, [])
-
 
     return (
         <>
-            <Types Typeprops={data} />
-
+            <Suspense fallback={<LoadingSpinner />}>
+                <AuthProvider>
+                    <Types />
+                </AuthProvider>
+                <footer className="footer bg-info-subtle">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <div className="py-3 text-center">
+                                    Built by <a href="localhost:3000" className="link-secondary text-decoration-none">FlowerMarket.io</a> with <span className="text-primary">&#9829;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </Suspense>
         </>
     )
 }

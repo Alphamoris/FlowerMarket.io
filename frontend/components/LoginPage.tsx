@@ -33,6 +33,7 @@ const Loginpage = () => {
                 setErrorState(true)
             }
             else{
+                localStorage.setItem("LoginStatus","true")
                 setIsLoggedIn(true)
                 setSubmitSuccess(true)
                 setErrorState(false)

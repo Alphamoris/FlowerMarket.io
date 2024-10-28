@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { AuthProvider, useAuth } from "./AuthContext"
+import { useAuth } from "./AuthContext"
 
 export default function Logout() {
 
@@ -11,6 +11,7 @@ export default function Logout() {
 
         e.preventDefault()
         setIsLoggedIn(false)
+        localStorage.removeItem("JWTtoken")
         setShowModal(false)
 
     }

@@ -1,12 +1,16 @@
+import LoadingSpinner from "@/components/LoadingSpinner";
 import LocationComponent from "@/components/LocationComponent";
 import Market from "@/components/Market";
+import { Suspense } from "react";
 
-export default function Home6(){
+export default function Home6() {
 
     return (
 
         <>
-        <Market />
+            <Suspense fallback={<LoadingSpinner />}>
+                <Market />
+            </Suspense>
         </>
     )
 }

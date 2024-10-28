@@ -5,9 +5,7 @@ import Loginpage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Mainheading from "./Mainheading";
 import Logout from "./Logout";
-import { useState } from "react";
 import { AuthProvider } from "./AuthContext";
-import LoginToast from "./LoginToast";
 import CommentToast from "./CommentToast";
 
 
@@ -15,7 +13,6 @@ import CommentToast from "./CommentToast";
 export default function Uppernavbar() {
 
 
-    const [loginstatus, setloginstatus] = useState<Boolean>(true)
     const onclick1 = () => {
         const variable = document.querySelector("#offcanvasWithBothOptions")
         variable?.setAttribute("class", "offcanvas offcanvas-start bg-dark-subtle hide")
@@ -57,7 +54,7 @@ export default function Uppernavbar() {
 
             <div
 
-                className="offcanvas offcanvas-start bg-dark-subtle"
+                className="offcanvas offcanvas-start bg-info-subtle"
                 data-bs-scroll="true"
                 data-bs-backdrop="false"
                 id="offcanvasWithBothOptions"
@@ -72,18 +69,16 @@ export default function Uppernavbar() {
                     </button>
                 </div>
                 <div className="offcanvas-body ">
-                    {loginstatus && (
-                        <Link href="/">
-                            <span className="badge bi-arrow-down-right-circle text-bg-secondary fs-6 my-4 col-12">
-                                Please Login</span></Link>
-                    )}
-                    <Link href="/market" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Markets</Link>
-                    <Link href="/seller" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Sellers</Link>
-                    <Link href="/bulkmarket" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Bulk Market</Link>
-                    <Link href="/" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Transport</Link>
-                    <Link href="/" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>History</Link>
-                    <Link href="/help/contactus" onClick={onclick1} className=" link-dark d-block mb-3 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Help</Link>
-
+                    <Link href="/market" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Markets</Link>
+                    <Link href="/seller" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Find Sellers</Link>
+                    <Link href="/bulkmarket" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Bulk Market</Link>
+                    <Link href="/" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Transport</Link>
+                    <Link href="/" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>History</Link>
+                    <Link href="/help/contactus" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Help</Link>
+                    <Image src="/sidebarlogo.png"
+                        alt="Main Logo"
+                        width={138}
+                        height={138} className="ms-5"></Image>
                 </div>
             </div>
         </>

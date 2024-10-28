@@ -1,22 +1,30 @@
-import { Comment, Id , PriceDetail, TypesI, SignUp, UserCrd, Token } from "@/interfaces/interfaces"
+import { Comment, Id, PriceDetail, TypesI, SignUp, UserCrd, Token } from "@/interfaces/interfaces"
 
+const getToken = () => {
+    return (localStorage.getItem("JWTtoken") ?? " ") 
+}
+export const getPriceDetails = async (): Promise<PriceDetail[] | any> => {
 
-
-export const getPriceDetails = async (): Promise<PriceDetail[]> => {
     try {
         const response = await fetch("http://127.0.0.1:8000/get/price/", {
             method: "GET",
             next: { revalidate: 60 },
             headers: {
-                "Content-Type": "application/json"
+                'Authorization': `Bearer ${getToken()}`
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`Failed to load the data from API. Status: ${response.status}`);
+        if(response.status === 401){
+            localStorage.removeItem("JWTToken")
+            return "Unauthorized"
+        }
+        else if (!response.ok) {
+            return false
+        }
+        else {
+            return await response.json();
         }
 
-        return await response.json();
     } catch (error) {
         console.error("Error fetching price details:", error);
         return [];
@@ -24,21 +32,28 @@ export const getPriceDetails = async (): Promise<PriceDetail[]> => {
 };
 
 
-export const getTypesDetails = async (): Promise<TypesI[]> => {
+export const getTypesDetails = async (): Promise<TypesI[] | any> => {
     try {
         const response = await fetch("http://127.0.0.1:8000/get/types/", {
             method: "GET",
             next: { revalidate: 60 },
             headers: {
-                "Content-Type": "application/json"
+                'Authorization': `Bearer ${getToken()}`
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        
+        if(response.status === 401){
+            localStorage.removeItem("JWTToken")
+            return ["Unauthorized"]
+        }
+        else if (!response.ok) {
+            return false
+        }
+        else {
+            return await response.json();
         }
 
-        return await response.json();
     } catch (error) {
         console.error("Error fetching types details:", error);
         return [];
@@ -64,6 +79,7 @@ export const setComments = async (details: Comment): Promise<any> => {
             throw new Error("Failed to upload records");
         }
 
+        console.log(getToken())
         return await response.json();
     } catch (error) {
         console.error("Error uploading comments:", error);
@@ -115,7 +131,7 @@ export const signUp = async (details: SignUp): Promise<any> => {
 }
 
 
-export const login = async (credentials: UserCrd): Promise<Token | boolean> => {
+export const login = async (credentials: UserCrd): Promise<Token | any> => {
     const formData = new FormData()
     formData.append("username", credentials.username)
     formData.append("password", credentials.password)
@@ -128,15 +144,19 @@ export const login = async (credentials: UserCrd): Promise<Token | boolean> => {
         })
 
 
-        if (!data.ok) {
-            console.log("The Error is from login :", data.status)
+        if (data.ok) {
+            const { access_token , token_type } = await data.json()
+            localStorage.setItem("JWTtoken", access_token )
+            return true
+        }
+
+        else {
             return false
         }
-        return await data.json()
     }
 
     catch (error) {
-        console.error("Error uploading comments:", error);
+        console.error("Error:", error);
         return {
             tokentype: "",
             accesstoken: ""
@@ -147,12 +167,12 @@ export const login = async (credentials: UserCrd): Promise<Token | boolean> => {
 }
 
 
-export const getalluserid = async () : Promise<Id[]> => {
+export const getalluserid = async (): Promise<Id[]> => {
 
-    try{
+    try {
 
-        const response = await fetch("http://127.0.0.1:8000/price/id" , {
-            method : "GET" ,
+        const response = await fetch("http://127.0.0.1:8000/price/id", {
+            method: "GET",
             next: { revalidate: 60 },
             headers: {
                 "Content-Type": "application/json"
@@ -172,23 +192,29 @@ export const getalluserid = async () : Promise<Id[]> => {
 }
 
 
-export const detailsById = async ( id : number ) : Promise<PriceDetail | any> => {
+export const detailsById = async (id: number): Promise<PriceDetail | any> => {
 
-    try{
+    try {
 
-        const response = await fetch("http://127.0.0.1:8000/details/by/id?id=" + `${id}` , {
-            method : "GET" ,
+        const response = await fetch("http://127.0.0.1:8000/details/by/id?id=" + `${id}`, {
+            method: "GET",
             next: { revalidate: 60 },
             headers: {
-                "Content-Type": "application/json"
+                'Authorization': `Bearer ${getToken()}`
             }
         });
 
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data. Status: ${response.status}`);
+        if(response.status === 401){
+            localStorage.removeItem("JWTToken")
+            return "Unauthorized"
+        }
+        else if (!response.ok) {
+            return false
+        }
+        else {
+            return await response.json();
         }
 
-        return await response.json();
     } catch (error) {
         console.error("Error fetching types details:", error);
         return [];

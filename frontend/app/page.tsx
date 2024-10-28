@@ -15,6 +15,7 @@ import LocationComponent from "@/components/LocationComponent";
 import Map from "@/components/Map"
 import LoadingSpinner from "@/components/LoadingSpinner";
 import CheckoutForm from "@/components/CheckOut";
+import PleaseLogin from "@/components/PleaseLogin";
 
 
 
