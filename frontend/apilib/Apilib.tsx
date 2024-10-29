@@ -6,7 +6,7 @@ const getToken = () => {
 export const getPriceDetails = async (): Promise<PriceDetail[] | any> => {
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/get/price/", {
+        const response = await fetch("http://127.0.0.1:8000/get/price", {
             method: "GET",
             next: { revalidate: 60 },
             headers: {
