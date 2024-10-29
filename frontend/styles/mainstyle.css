@@ -134,6 +134,10 @@
   background: linear-gradient(-90deg, #ffc5c5, #ffa07a, #ffd7be, #c5cae9);
 }
 
-.typesclr {
+.typesclr  {
   background: linear-gradient(-90deg, #ffc5c5, #ffa07a, #ffd7be, #c5cae9);
+}
+
+.productpage {
+  background: linear-gradient(45deg, #e3ffe7, #d9e7ff, #c0c0aa);
 }

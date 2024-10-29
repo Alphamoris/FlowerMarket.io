@@ -11,15 +11,12 @@ interface Params {
 
 export default async function SlugPage({ params }: { params: Params }) {
 
-    const response: PriceDetail = await detailsById(params.id)
+
 
     return (
         <>
             <Suspense fallback={<LoadingSpinner />}>
-                <ProductPage id={response.id} shop_name={response.shop_name} date=
-                    {response.date} time={response.time} fname={response.fname}
-                    description={response.description} price={response.price} place=
-                    {response.place} />
+                <ProductPage id={{ id : params.id}} />
             </Suspense>
 
         </>

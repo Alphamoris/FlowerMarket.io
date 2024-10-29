@@ -11,10 +11,16 @@ class price(Base):
     shop_name = Column(String , nullable=True , default="Nearby Store")
     date = Column(Date , server_default=func.current_date())
     time = Column(Time , server_default=func.current_time())
-    fname = Column(String , nullable=False)
-    description = Column(String , nullable=True , default="Fresh Flowers")
+    flowname = Column(String , nullable=False)
+    main_description = Column(String , nullable=True , default="Fresh Flowers")
+    rating = Column(Integer , default= 4)
+    no_of_reviews = Column(Integer , default= 8)
+    seller_type = Column(String , default="Farmer")
+    availability = Column(Integer , default=5)
     price =Column(Integer , default= 0)
     place = Column(String , nullable=False )
+    long_description = Column(String , nullable = True , default="Fresh Flowers")
+
 
 class types(Base):
 

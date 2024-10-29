@@ -75,10 +75,10 @@ export default function Uppernavbar() {
                     <Link href="/" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Transport</Link>
                     <Link href="/" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>History</Link>
                     <Link href="/help/contactus" onClick={onclick1} className=" link-dark d-block mb-4 ms-3 links"><i className="bi bi-caret-right-fill me-2"></i>Help</Link>
-                    <Image src="/sidebarlogo.png"
+                    <Image src="/logo.png"
                         alt="Main Logo"
                         width={138}
-                        height={138} className="ms-5"></Image>
+                        height={138} className=""></Image>
                 </div>
             </div>
         </>

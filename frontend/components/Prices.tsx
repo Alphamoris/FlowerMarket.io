@@ -71,9 +71,9 @@ const Prices: React.FC = () => {
                     </div>
                     <div className="col-md-8">
                       <div className="card-body">
-                        <h5 className="card-title">{element.detail1.fname}</h5>
+                        <h5 className="card-title">{element.detail1.flowname}</h5>
                         <p className="card-text">
-                          {element.detail1.description}
+                          {element.detail1.main_description}
                           <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
                           <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail1.place}</h6>
                         </p>
@@ -119,9 +119,9 @@ const Prices: React.FC = () => {
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
-                          <h5 className="card-title">{element.detail2.fname}</h5>
+                          <h5 className="card-title">{element.detail2.flowname}</h5>
                           <p className="card-text">
-                            {element.detail2.description}
+                            {element.detail2.main_description}
                             <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail2.price}</h6>
                             <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail2.place}</h6>
                           </p>

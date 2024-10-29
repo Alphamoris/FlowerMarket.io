@@ -72,8 +72,8 @@ def signup( user : User , db : Session = Depends(get_db)):
 @app.get("/details/by/id" , response_model= price)
 def get_details( id : int , id1 = Depends(get_current_user) , db : Session = Depends(get_db)):
     response = get_details_by_id( db = db , id = id)
-    print(response)
     return response
+
 
 
 

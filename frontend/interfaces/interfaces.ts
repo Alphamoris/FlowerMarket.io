@@ -1,13 +1,21 @@
+// types/interfaces.ts
+
 export interface PriceDetail {
     id: number;
     shop_name: string;
-    date: Date;
+    date: string;
     time: string;
-    fname: string;
-    description: string;
+    flowname: string;
+    main_description: string;
+    rating: number;
+    no_of_reviews: number;
+    seller_type: string;
+    availability: number;
     price: number;
     place: string;
+    long_description: string;
 }
+
 
 export interface PricePair {
     detail1: PriceDetail;
