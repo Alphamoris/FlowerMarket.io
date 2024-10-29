@@ -1,10 +1,11 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { Star, Heart, ShoppingCart, ArrowRight, IndianRupeeIcon, IndianRupee } from 'lucide-react';
+import { Star, Heart, ShoppingCart, ArrowRight, IndianRupeeIcon, IndianRupee, TicketSlashIcon, CircleCheckBig } from 'lucide-react';
 import { PriceDetail } from '@/interfaces/interfaces';
 import { detailsById } from '@/apilib/Apilib';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface ProductPageProps {
   id: { id: number };
@@ -55,6 +56,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
   ];
 
 
+  const [cartState,setCartState] = useState<boolean>(true)
 
   return (
     <>
@@ -116,7 +118,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
                 <div className="mb-4">
                   <div className="d-flex align-items-center gap-1 mt-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4" fill={i < 1 ? "gold" : "none"} color="gold" />
+                      <Star key={i} className="w-4 h-4" fill={i < (data?.rating || 4 ) ?  "gold" : "none"} color="gold" />
                     ))}
                     <span className="ms-2 text-muted">({data?.no_of_reviews} reviews)</span>
                   </div>
@@ -163,14 +165,22 @@ const ProductPage = ({ id }: ProductPageProps) => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="d-grid gap-2 mb-4">
-                  <button className="btn btn-primary btn-lg">
-                    Add to Cart <ShoppingCart className="w-5 h-5 ms-2" />
+                {cartState ?
+                (<div className="d-grid gap-2 mb-4">
+                  <button className="btn btn-primary btn-lg" onClick={() => setCartState(!cartState)}>
+                    Add to Cart <ShoppingCart className="w-5 h-5 ms-2 text-center" />
                   </button>
-                  <button className="btn btn-outline-primary btn-lg">
+                  <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
                     Buy Now <ArrowRight className="w-5 h-5 ms-2" />
+                  </Link>
+                </div>) : (<div className="d-grid gap-2 mb-4">
+                  <button className="btn btn-success btn-lg" onClick={() => setCartState(!cartState)}>
+                    Add to Cart <i className="bi bi-cart-check-fill fs-5 ms-2"></i>
                   </button>
-                </div>
+                  <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
+                    Buy Now <ArrowRight className="w-5 h-5 ms-2" />
+                  </Link>
+                </div>)}
 
                 {/* Features */}
                 <div className="mb-4">

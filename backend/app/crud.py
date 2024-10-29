@@ -60,7 +60,6 @@ def new_user( db : Session , new_user : User):
 def get_user( db : Session , username : str , password : str ):
     data = (db.query(user.emailid,user.password).filter(user.emailid == username).first())
     if data is None :
-        print(data)
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=f"Invalid Credentials")
     if (verify(password,data.password)):
         return True

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { PriceDetail, PricePair } from "@/interfaces/interfaces"
 import PleaseLogin from "@/components/PleaseLogin";
 import { useAuth } from "@/components/AuthContext";
+import moment from "moment";
 
 
 
@@ -12,6 +13,9 @@ const Prices: React.FC = () => {
 
   const [pricePairs, setPricePairs] = useState<PricePair[]>([]);
   const { isLoggedIn, setIsLoggedIn } = useAuth()
+
+  
+
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -53,7 +57,7 @@ const Prices: React.FC = () => {
                     <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">R</span>
                     <div className="ms-3">
                       <h6 className="mb-0 fs-sm">{element.detail1.id} {element.detail1.shop_name}</h6>
-                      <span className="text-muted fs-sm">{element.detail1.time}</span>
+                      <span className="text-muted fs-sm">{moment(`${element.detail1.date}T${(element.detail1.time)}`).format("hh:mm:ss A")}</span>
                     </div>
                     <div className="dropstart ms-auto">
                       <button className="btn text-muted" type="button" data-bs-toggle="dropdown" aria-label="button" aria-expanded="false">
@@ -73,8 +77,8 @@ const Prices: React.FC = () => {
                       <div className="card-body">
                         <h5 className="card-title">{element.detail1.flowname}</h5>
                         <p className="card-text">
-                          {element.detail1.main_description}
-                          <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
+                        {(element.detail1.main_description.split(" ")).slice(0,15).join(" ")+"..."}
+                        <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
                           <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail1.place}</h6>
                         </p>
                         <p className="card-text">
@@ -101,7 +105,7 @@ const Prices: React.FC = () => {
                       <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">R</span>
                       <div className="ms-3">
                         <h6 className="mb-0 fs-sm">{element.detail2.id} {element.detail2.shop_name}</h6>
-                        <span className="text-muted fs-sm">{element.detail2.time}</span>
+                        <span className="text-muted fs-sm">{moment(`${element.detail1.date}T${(element.detail1.time)}`).format("hh:mm:ss A")}</span>
                       </div>
                       <div className="dropstart ms-auto">
                         <button className="btn text-muted" type="button" data-bs-toggle="dropdown" aria-label="button" aria-expanded="false">
@@ -121,7 +125,7 @@ const Prices: React.FC = () => {
                         <div className="card-body">
                           <h5 className="card-title">{element.detail2.flowname}</h5>
                           <p className="card-text">
-                            {element.detail2.main_description}
+                            {(element.detail2.main_description.split(" ")).slice(0,15).join(" ")+"..."}
                             <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail2.price}</h6>
                             <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail2.place}</h6>
                           </p>

@@ -12,16 +12,21 @@ class details(BaseModel):
 
 
 class price(BaseModel):
-    id : int
-    shop_name : str
-    date : date
-    time : time
-    fname : str
-    description : str
-    price : int
-    place : str
+    id: int
+    shop_name: str
+    date: date 
+    time: time
+    flowname: str
+    main_description: str
+    rating: int
+    no_of_reviews: int
+    seller_type: str
+    availability: int
+    price: int
+    place: str
+    long_description: str = None  # Optional field
 
-    class Cofig:
+    class Config:
         orm_mode = True
 
 class comment(BaseModel):

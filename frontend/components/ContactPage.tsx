@@ -1,6 +1,5 @@
 import "@fontsource/nerko-one"
 import "../styles/contactpagestyle.css"
-import Contacticons from "@/components/Contacticons";
 export default function ContactPage() {
 
 

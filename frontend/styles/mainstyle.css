@@ -126,7 +126,7 @@
   background: linear-gradient(0deg, #e3ffe7, #d9e7ff, #c0c0aa);
 }
 
-.pricesclr {
+.pricesclr, .checkout {
   background: linear-gradient(90deg, #ffc107, #ffa07a, #ff69b4);
 }
 

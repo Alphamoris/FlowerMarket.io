@@ -1,11 +1,15 @@
 import ContactPage from "@/components/ContactPage";
+import { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
-export default function Home2(){
+export default function Home2() {
 
 
-    return(
+    return (
         <>
-        <ContactPage />
+            <Suspense fallback={<LoadingSpinner />}>
+                <ContactPage />
+            </Suspense>
         </>
     )
 }

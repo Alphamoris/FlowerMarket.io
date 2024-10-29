@@ -1,7 +1,5 @@
-"use client"
-import Prices from "@/components/Prices"
-import { PriceDetail, PricePair } from "@/interfaces/interfaces"
-import { useState } from "react"
+import LoadingSpinner from "@/components/LoadingSpinner"
+import { Suspense } from "react"
 
 export default function Home8() {
 
@@ -36,13 +34,14 @@ export default function Home8() {
         time: "04:20 AM"
     }
     ]
-    
+
 
     return (
 
         <>
-            <h1>under Construction!!!</h1>
-
+            <Suspense fallback={<LoadingSpinner />}>
+                <h1>under Construction!!!</h1>
+            </Suspense>
         </>
     )
 }
