@@ -1,7 +1,5 @@
-import { detailsById } from '@/apilib/Apilib';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ProductPage from '@/components/ProductPage';
-import { PriceDetail } from '@/interfaces/interfaces';
 import { Suspense } from 'react';
 
 

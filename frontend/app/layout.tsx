@@ -2,7 +2,6 @@ import Navbar from "../components/Navbar"
 import Uppernavbar from "../components/Uppernavbar"
 import "../styles/mainstyle.css"
 import Footer from "@/components/Footer";
-import { AuthProvider } from "@/components/AuthContext";
 
 
 export default function RootLayout({
