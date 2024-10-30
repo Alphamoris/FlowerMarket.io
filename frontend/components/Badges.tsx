@@ -1,6 +1,9 @@
+"use client"
 import React from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { AuthProvider } from "./AuthContext"
+import CommentToast from "./CommentToast"
 
 
 interface Badgeprops {
@@ -11,6 +14,9 @@ interface Badgeprops {
 const Badges: React.FC<Badgeprops> = ({ dummyarr }) => {
     return (
         <>
+        <AuthProvider>
+            <CommentToast/>
+        </AuthProvider>
             <div className="d-flex overflow-hidden border border-bottom-5 border-black bg-light-subtle badgeclr">
                 {dummyarr.map((element) => (
                     <>

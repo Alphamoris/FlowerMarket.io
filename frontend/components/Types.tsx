@@ -6,6 +6,7 @@ import { TypesI } from "@/interfaces/interfaces";
 import { getTypesDetails } from "@/apilib/Apilib";
 import PleaseLogin from "@/components/PleaseLogin";
 import { useAuth } from "@/components/AuthContext";
+import TypesToast from "./TypesToast";
 
 
 interface Typeprops {
@@ -41,6 +42,7 @@ const Types: React.FC = () => {
 
     return (
         <>
+        <TypesToast />
             {isLoggedIn ? (
                 <section className=" border-1 border-black border-top typesclr">
                     <div className="container">
@@ -66,6 +68,7 @@ const Types: React.FC = () => {
             ) :
                 <PleaseLogin />
             }
+           
         </>
     )
 }

@@ -1,47 +1,21 @@
-import LoadingSpinner from "@/components/LoadingSpinner"
-import { Suspense } from "react"
+"use client"
 
-export default function Home8() {
-
-
-    const prices = [{
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }, {
-        imgurl: "/pic1.png",
-        fname: "Jasmine",
-        content: "These are super fresh flowers from urban areas of india",
-        place: "Hosur",
-        price: 4500,
-        time: "04:20 AM"
-    }
-    ]
+import Prices from "@/components/Prices";
+import React, { Suspense } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { AuthProvider } from "@/components/AuthContext";
+import BulkMarket from "@/components/BulkMarket";
 
 
-    return (
+export default function Home13() {
 
-        <>
-            <Suspense fallback={<LoadingSpinner />}>
-                <h1>under Construction!!!</h1>
-            </Suspense>
-        </>
-    )
+  return (
+    <>
+      <Suspense fallback={<LoadingSpinner />}>
+        <AuthProvider>
+          <BulkMarket />
+        </AuthProvider>
+      </Suspense>
+    </>
+  );
 }

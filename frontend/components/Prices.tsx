@@ -54,9 +54,9 @@ const Prices: React.FC = () => {
               <div className="col">
                 <div className="card m-3 border border-5 rounded-4" id="pricescard">
                   <div className="card-header d-flex align-items-center">
-                    <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">R</span>
+                    <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">{(element.detail1.shop_name)[0]}</span>
                     <div className="ms-3">
-                      <h6 className="mb-0 fs-sm">{element.detail1.id} {element.detail1.shop_name}</h6>
+                      <h6 className="mb-0 fs-sm">{element.detail1.shop_name}</h6>
                       <span className="text-muted fs-sm">{moment(`${element.detail1.date}T${(element.detail1.time)}`).format("hh:mm:ss A")}</span>
                     </div>
                     <div className="dropstart ms-auto">
@@ -77,12 +77,12 @@ const Prices: React.FC = () => {
                       <div className="card-body">
                         <h5 className="card-title">{element.detail1.flowname}</h5>
                         <p className="card-text">
-                        {(element.detail1.main_description.split(" ")).slice(0,15).join(" ")+"..."}
+                        {(element.detail1.main_description.split(" ")).slice(0,13).join(" ")+"..."}
                         <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
                           <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail1.place}</h6>
                         </p>
                         <p className="card-text">
-                          <small className="text-muted">Last updated 3 mins ago</small>
+                          <small className="text-muted">Reviews: {element.detail1.no_of_reviews}</small>
                         </p>
                       </div>
                     </div>
@@ -102,9 +102,9 @@ const Prices: React.FC = () => {
                 <div className="col">
                   <div className="card m-3 border border-5 rounded-4" id="pricescard">
                     <div className="card-header d-flex align-items-center">
-                      <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">R</span>
+                      <span className="avatar text-bg-dark text-center align-content-center avatar-lg rounded-5 fs-5">{(element.detail2.shop_name)[0]}</span>
                       <div className="ms-3">
-                        <h6 className="mb-0 fs-sm">{element.detail2.id} {element.detail2.shop_name}</h6>
+                        <h6 className="mb-0 fs-sm">{element.detail2.shop_name}</h6>
                         <span className="text-muted fs-sm">{moment(`${element.detail1.date}T${(element.detail1.time)}`).format("hh:mm:ss A")}</span>
                       </div>
                       <div className="dropstart ms-auto">
@@ -130,7 +130,7 @@ const Prices: React.FC = () => {
                             <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail2.place}</h6>
                           </p>
                           <p className="card-text">
-                            <small className="text-muted">Last updated 3 mins ago</small>
+                            <small className="text-muted">Reviews: {element.detail2.no_of_reviews}</small>
                           </p>
                         </div>
                       </div>

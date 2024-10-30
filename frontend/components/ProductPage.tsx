@@ -50,7 +50,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
 
   const specs = [
     { label: "Seller", value: data?.seller_type },
-    { label: "Availability", value: data?.availability },
+    { label: "Availability", value: data?.availability+" Kg" },
     { label: "Delivery", value: "With in 4 days " },
     { label: "Place", value: data?.place }
   ];
@@ -175,7 +175,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
                   </Link>
                 </div>) : (<div className="d-grid gap-2 mb-4">
                   <button className="btn btn-success btn-lg" onClick={() => setCartState(!cartState)}>
-                    Add to Cart <i className="bi bi-cart-check-fill fs-5 ms-2"></i>
+                    Added to Cart <i className="bi bi-cart-check-fill fs-5 ms-2"></i>
                   </button>
                   <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
                     Buy Now <ArrowRight className="w-5 h-5 ms-2" />

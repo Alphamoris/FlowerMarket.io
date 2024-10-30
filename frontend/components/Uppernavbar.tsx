@@ -47,7 +47,6 @@ export default function Uppernavbar() {
                         <Loginpage />
                         <SignupPage />
                         <Logout />
-                        <CommentToast />
                     </AuthProvider>
                 </div>
             </nav>
