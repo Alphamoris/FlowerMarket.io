@@ -56,32 +56,6 @@ sequenceDiagram
 - Python (v3.8 or higher)
 - PostgreSQL
 
-### Installation Steps
-
-1. Clone the repository
-```bash
-git clone https://github.com/yourusername/flowermarket.git
-```
-
-2. Navigate to project directory
-```bash
-cd flowermarket
-```
-
-3. Install dependencies
-```bash
-npm install
-```
-
-4. Start development server
-```bash
-npm run dev
-```
-
-5. Open your browser and visit `http://localhost:3000`
-
-
-
 
 ## 💬 Feedback
 
@@ -97,18 +71,15 @@ Your feedback helps us grow! Please share your thoughts and suggestions using th
 ## 📝 Contributing
 We welcome contributions! Please feel free to submit a Pull Request.
 
-## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🤝 Support
-For support, email support@flowermarket.io or join our Discord community.
+For support, email alphamoris45@gamil.com or join our Discord community.
 </div>
 <div align="center">
 ---
 
-### Built with 💝 by the FlowerMarket Team
+### Built with 💝 by Alphamoris
 
-[Website](https://flowermarket.io) • [Documentation](https://docs.flowermarket.io) • [Blog](https://blog.flowermarket.io)
+[Website](https://flowermarket.io) • [Documentation](https://flowermarket.io/docs) 
 
 <sub>Powered by Next.js, FastAPI, and lots of ☕</sub>
 ---
