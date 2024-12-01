@@ -36,7 +36,7 @@ class comment(BaseModel):
     rating : float | None = None
     comment : str
 
-    class Cofig:
+    class Config:
         orm_mode = True
 
 
@@ -48,7 +48,7 @@ class UserCrd(BaseModel):
 class Token(BaseModel):
     access_token : str 
     token_type : str
-    class Cofig:
+    class Config:
         orm_mode = True
 
 
@@ -63,7 +63,7 @@ class User(UserCrd):
     state : str
     dob : date
 
-    class Cofig:
+    class Config:
         orm_mode = True
 
 
