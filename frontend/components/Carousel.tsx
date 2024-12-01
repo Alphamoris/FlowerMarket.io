@@ -10,25 +10,25 @@ export default function Carousel() {
                     <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
                 </div>
                 <div className="carousel-inner">
-                    <div className="carousel-item active bg-body" data-bs-interval="1000">
+                    <div className="carousel-item active bg-body" data-bs-interval="2000">
                         <Image className="d-block w-100 Image-thumbnail carouselImage" width={400} height={400} src="/carousel1.jpeg" alt="Tokyo" />
                         <div className="carousel-caption d-none d-md-block">
-                            <h5 className="fs-1">Flat 50% Off 1</h5>
+                            <h5 className="fs-1">Flat 50% Off</h5>
                             <p className="fs-3">Only a limited time deal.</p>
                         </div>
                     </div>
-                    <div className="carousel-item" data-bs-interval="1000">
-                        <Image className="d-block w-100  Image-thumbnail carouselImage" src="/carousel1.jpeg" width={400} height={400} alt="Shanghai" />
+                    <div className="carousel-item" data-bs-interval="2000">
+                        <Image className="d-block w-100  Image-thumbnail carouselImage" src="/carousel2.png" width={400} height={400} alt="Shanghai" />
                         <div className="carousel-caption d-none d-md-block">
-                            <h5 className="fs-1">Flat 50% Off 2</h5>
-                            <p className="fs-3">Only a limited time deal.</p>
+                            <h5 className="fs-1">Special Offer on Bouquets</h5>
+                            <p className="fs-3">Suprise your loved ones with our special bouquets.</p>
                         </div>
                     </div>
-                    <div className="carousel-item" data-bs-interval="1000">
-                        <Image className="d-block w-100 Image-thumbnail carouselImage" src="/carousel1.jpeg" width={400} height={400} alt="Newyork" />
+                    <div className="carousel-item" data-bs-interval="2000">
+                        <Image className="d-block w-100 Image-thumbnail carouselImage" src="/carousel31.jpeg" width={400} height={400} alt="Newyork" />
                         <div className="carousel-caption d-none d-md-block">
-                            <h5 className="fs-1">Flat 50% Off 3</h5>
-                            <p className="fs-3">Only a limited time deal.</p>
+                            <h5 className="fs-1">Free Delivery</h5>
+                            <p className="fs-3">Get free delivery on orders above 399.</p>
                         </div>
                     </div>
                 </div>

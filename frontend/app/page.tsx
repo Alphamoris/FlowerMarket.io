@@ -16,6 +16,10 @@ export default function Home() {
     { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
     { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
     { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
+    { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" },
     { imgurl: "/pic1.png", name: "Jasmine" }, { imgurl: "/pic1.png", name: "Jasmine" }
   ]
   return (

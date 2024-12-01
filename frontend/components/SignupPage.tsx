@@ -45,7 +45,6 @@ export default function SignupPage() {
         const newData = { ...data, dob: formattedDob };
         try {
 
-            console.log(data)
             const response = await signUp(newData)
             if(response == false){
                 setIsError(true)

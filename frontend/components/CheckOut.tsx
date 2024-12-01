@@ -80,8 +80,8 @@ const CheckoutForm = ({ id }: Id) => {
                         value={quantity}
                         onChange={(e) => setQuantity(Number(e.target.value))}
                       >
-                        {[1, 2, 3, 4, 5].map(num => (
-                          <option key={num} value={num}>{num}</option>
+                        {[1, 2, 3, 4, 5 , 6 , 7 , 8].map(num => (
+                          <option key={num} value={num}>{num + " kg"}</option>
                         ))}
                       </select>
                       <label htmlFor='quantity' className=' visually-hidden'>d</label>
