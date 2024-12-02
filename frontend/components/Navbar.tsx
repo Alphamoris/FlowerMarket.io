@@ -12,35 +12,35 @@ export default function Navbar() {
                     <div className="d-flex me-auto">
                         <div className="text-center me-3">
                             <Link href={"/"}>
-                                <button className="btn navlinks" type="button" aria-label="telephone">
+                                <button className="btn navlinks" type="button" aria-label="home">
                                     <i className="bi bi-house me-1"></i>Home
                                 </button>
                             </Link>
                         </div>
                         <div className="text-center me-3">
                             <Link href={"/prices"}>
-                                <button className="btn navlinks" type="button" aria-label="profile">
-                                    <i className="bi bi-currency-rupee"></i>Price
+                                <button className="btn navlinks" type="button" aria-label="prices">
+                                    <i className="bi bi-currency-rupee"></i>Prices
                                 </button>
                             </Link>
                         </div>
                         <div className="text-center me-3">
                             <Link href={"/types"}>
-                                <button className="btn navlinks" type="button" aria-label="profile">
+                                <button className="btn navlinks" type="button" aria-label="types">
                                     <i className="bi bi-flower3"></i>Types
                                 </button>
                             </Link>
                         </div>
                         <div className="text-center me-3">
                             <Link href={"/market"}>
-                                <button className="btn navlinks" type="button" aria-label="shop">
+                                <button className="btn navlinks" type="button" aria-label="market">
                                     <i className="bi bi-shop me-1"></i>Market
                                 </button>
                             </Link>
                         </div>
                         <div className="text-center me-3">
                             <Link href={"/help/aboutus"}>
-                                <button className="btn navlinks" type="button" aria-label="profile">
+                                <button className="btn navlinks" type="button" aria-label="about us">
                                     <i className="bi bi-feather2"></i>About Us
                                 </button>
                             </Link>
@@ -51,15 +51,17 @@ export default function Navbar() {
                         <div className="border border-dark rounded-1">
                             <div className="input-group input-group-prefix input-group-sm">
                                 <input type="text" className="form-control form-control-sm" placeholder="Search..."
-                                    aria-label="Input group example" aria-describedby="btnGroupAddon2" />
-                                <div className="input-group-text"><button className='btn btn-sm btn-outline-dark' type="button" aria-label="button"><i className="bi bi-search"></i></button></div>
+                                    aria-label="Search input" aria-describedby="btnGroupAddon2" />
+                                <div className="input-group-text">
+                                    <button className='btn btn-sm btn-outline-dark' type="button" aria-label="search">
+                                        <i className="bi bi-search"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
-
             </nav>
-
         </>
     )
 }
