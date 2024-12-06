@@ -4,7 +4,7 @@ import Prices from "@/components/Prices";
 import React, { Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { AuthProvider } from "@/components/AuthContext";
-import BulkMarket from "@/components/BulkMarket";
+import Bulkmarket from "@/components/Bulkmarket";
 
 
 export default function Home13() {
@@ -13,7 +13,7 @@ export default function Home13() {
     <>
       <Suspense fallback={<LoadingSpinner />}>
         <AuthProvider>
-          <BulkMarket />
+          <Bulkmarket />
         </AuthProvider>
       </Suspense>
     </>

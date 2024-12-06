@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { getPriceDetails } from "@/apilib/Apilib";
 import React, { useEffect, useState } from "react";
 import { PriceDetail, PricePair } from "@/interfaces/interfaces"
@@ -43,7 +44,7 @@ const BulkMarket: React.FC = () => {
         };
 
         fetchPrices();
-    }, []);
+    }, [setIsLoggedIn]);
 
 
     return (
@@ -75,7 +76,7 @@ const BulkMarket: React.FC = () => {
                                         </div>
                                         <div className="row g-0">
                                             <div className="col-md-4">
-                                                <img src="/pic1.png" className="img-fluid rounded-start" alt="images" />
+                                                <Image src="/pic1.png" className="img-fluid rounded-start" alt="images" width={500} height={300} />
                                             </div>
                                             <div className="col-md-8">
                                                 <div className="card-body">
@@ -125,7 +126,7 @@ const BulkMarket: React.FC = () => {
                                             </div>
                                             <div className="row g-0">
                                                 <div className="col-md-4">
-                                                    <img src="/pic2.png" className="img-fluid rounded-start" alt="images" />
+                                                    <Image src="/pic2.png" className="img-fluid rounded-start" alt="images" width={500} height={300} />
                                                 </div>
                                                 <div className="col-md-8">
                                                     <div className="card-body">

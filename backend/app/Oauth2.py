@@ -1,7 +1,7 @@
 import jwt
 from passlib.context import CryptContext
 from datetime import timedelta , datetime , timezone
-from jwt.exceptions import InvalidTokenError 
+from jwt import InvalidTokenError
 from pydantic import EmailStr
 from typing import Annotated 
 from fastapi import Depends , HTTPException , status

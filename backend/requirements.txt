@@ -4,3 +4,9 @@ passlib[bcrypt]
 pyjwt
 pydantic-settings
 python-dotenv
+psycopg2-binary
+uvicorn
+fastapi[standard]
+
+
+

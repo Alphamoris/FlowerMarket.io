@@ -1,0 +1,12 @@
+node_modules
+.next
+build
+dist
+.vscode
+.eslintcache
+.git
+logs
+tmp
+Dockerfile
+docker-compose.yml
+README.md

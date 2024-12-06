@@ -1,3 +1,4 @@
+"use client";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import Seller from "@/components/Seller";
 import { Suspense } from "react";

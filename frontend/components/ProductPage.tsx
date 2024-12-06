@@ -11,12 +11,11 @@ interface ProductPageProps {
   id: { id: number };
 };
 
-
-
 const ProductPage = ({ id }: ProductPageProps) => {
 
   const [data, setData] = useState<PriceDetail>()
-  const [likeState,setLikeState] = useState<boolean>(true)
+  const [likeState, setLikeState] = useState<boolean>(true)
+
   useEffect(() => {
     const apiCall = async () => {
       try {
@@ -28,9 +27,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
       }
     }
     apiCall()
-  }, [])
-
-
+  }, [id.id]) // Added id.id to the dependency array
 
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -50,13 +47,12 @@ const ProductPage = ({ id }: ProductPageProps) => {
 
   const specs = [
     { label: "Seller", value: data?.seller_type },
-    { label: "Availability", value: data?.availability+" Kg" },
+    { label: "Availability", value: data?.availability + " Kg" },
     { label: "Delivery", value: "With in 4 days " },
     { label: "Place", value: data?.place }
   ];
 
-
-  const [cartState,setCartState] = useState<boolean>(true)
+  const [cartState, setCartState] = useState<boolean>(true)
 
   return (
     <>
@@ -81,22 +77,27 @@ const ProductPage = ({ id }: ProductPageProps) => {
                     alt="Product"
                     width={400}
                     height={400}
-                  ></Image>
-                  {likeState ? (<button aria-label='button' className="btn btn-light position-absolute top-0 end-0 m-2" onClick={()=>setLikeState(!likeState)}>
-                    <Heart className="w-5 h-5" />
-                  </button>) :
-                  (<button aria-label='button' className="btn btn-light position-absolute top-0 end-0 m-2 text-danger" onClick={()=>setLikeState(!likeState)}>
-                    <Heart className="w-5 h-5" />
-                  </button>)}
+                  />
+                  {likeState ? (
+                    <button aria-label='button' className="btn btn-light position-absolute top-0 end-0 m-2" onClick={() => setLikeState(!likeState)}>
+                      <Heart className="w-5 h-5" />
+                    </button>
+                  ) : (
+                    <button aria-label='button' className="btn btn-light position-absolute top-0 end-0 m-2 text-danger" onClick={() => setLikeState(!likeState)}>
+                      <Heart className="w-5 h-5" />
+                    </button>
+                  )}
                 </div>
 
                 <div className="row g-2 mt-5">
                   {images.map((img, index) => (
                     <div className="col-3" key={index}>
-                      <img
+                      <Image
                         src={img}
                         className={`img-fluid rounded cursor-pointer ${selectedImage === index ? 'border border-primary' : ''}`}
                         alt={`Thumbnail ${index + 1}`}
+                        width={100} // Added width for optimization
+                        height={100} // Added height for optimization
                         onClick={() => setSelectedImage(index)}
                       />
                     </div>
@@ -118,7 +119,7 @@ const ProductPage = ({ id }: ProductPageProps) => {
                 <div className="mb-4">
                   <div className="d-flex align-items-center gap-1 mt-1">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4" fill={i < (data?.rating || 4 ) ?  "gold" : "none"} color="gold" />
+                      <Star key={i} className="w-4 h-4" fill={i < (data?.rating || 4) ? "gold" : "none"} color="gold" />
                     ))}
                     <span className="ms-2 text-muted">({data?.no_of_reviews} reviews)</span>
                   </div>
@@ -166,21 +167,21 @@ const ProductPage = ({ id }: ProductPageProps) => {
 
                 {/* Action Buttons */}
                 {cartState ?
-                (<div className="d-grid gap-2 mb-4">
-                  <button className="btn btn-primary btn-lg" onClick={() => setCartState(!cartState)}>
-                    Add to Cart <ShoppingCart className="w-5 h-5 ms-2 text-center" />
-                  </button>
-                  <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
-                    Buy Now <ArrowRight className="w-5 h-5 ms-2" />
-                  </Link>
-                </div>) : (<div className="d-grid gap-2 mb-4">
-                  <button className="btn btn-success btn-lg" onClick={() => setCartState(!cartState)}>
-                    Added to Cart <i className="bi bi-cart-check-fill fs-5 ms-2"></i>
-                  </button>
-                  <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
-                    Buy Now <ArrowRight className="w-5 h-5 ms-2" />
-                  </Link>
-                </div>)}
+                  (<div className="d-grid gap-2 mb-4">
+                    <button className="btn btn-primary btn-lg" onClick={() => setCartState(!cartState)}>
+                      Add to Cart <ShoppingCart className="w-5 h-5 ms-2 text-center" />
+                    </button>
+                    <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
+                      Buy Now <ArrowRight className="w-5 h-5 ms-2" />
+                    </Link>
+                  </div>) : (<div className="d-grid gap-2 mb-4">
+                    <button className="btn btn-success btn-lg" onClick={() => setCartState(!cartState)}>
+                      Added to Cart <i className="bi bi-cart-check-fill fs-5 ms-2"></i>
+                    </button>
+                    <Link href={`/prices/checkout/${data?.id}`} className="btn btn-outline-primary btn-lg">
+                      Buy Now <ArrowRight className="w-5 h-5 ms-2" />
+                    </Link>
+                  </div>)}
 
                 {/* Features */}
                 <div className="mb-4">
@@ -235,8 +236,6 @@ const ProductPage = ({ id }: ProductPageProps) => {
                     <li className="mb-3">🚚 2-4 business days delivery</li>
                     <li className="mb-3">📦 Secure packaging</li>
                     <li className="mb-3">🔄 Easy returns policy</li>
-
-
                   </ul>
                 </div>
               </div>

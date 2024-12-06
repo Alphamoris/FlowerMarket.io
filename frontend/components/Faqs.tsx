@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Faqs() {
 
@@ -8,13 +9,13 @@ export default function Faqs() {
         <div className="container">
           <div className="row gy-5 gy-lg-0 align-items-lg-center">
             <div className="col-12 col-lg-6">
-              <img className="img-fluid rounded" loading="lazy" src="./faqimg.jpeg" alt="How can we help you?" />
+              <Image className="img-fluid rounded" loading="lazy" src="/faqimg.jpeg" alt="How can we help you?" width={500} height={300} />
             </div>
             <div className="col-12 col-lg-6">
               <div className="row justify-content-xl-end">
                 <div className="col-12 col-xl-11">
                   <h2 className="h1 mb-3">How can we help you?</h2>
-                  <p className="lead fs-4 text-secondary mb-5">We hope you have found an answer to your question. If you need any help, please search your query on our Support Center or<Link className="fs-4" href={"/help/contactus"}> contact us</Link> via email.</p>
+                  <p className="lead fs-4 text-secondary mb-5">We hope you have found an answer to your question. If you need any help, please search your query on our Support Center or <Link className="fs-4" href={"/help/contactus"}>contact us</Link> via email.</p>
                   <div className="accordion accordion-flush" id="accordionExample">
                     <div className="accordion-item">
                       <h2 className="accordion-header" id="headingOne">
@@ -24,10 +25,10 @@ export default function Faqs() {
                       </h2>
                       <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                          <p>To find your tranport incharge number, please follow these steps:</p>
+                          <p>To find your transport incharge number, please follow these steps:</p>
                           <ul>
                             <li><i className="bi bi-bullseye me-2"></i>Go to our website and sign in to your account.</li>
-                            <li><i className="bi bi-bullseye me-2"></i>Click on the menu in the top left corner of the page and select "Orders History"</li>
+                            <li><i className="bi bi-bullseye me-2"></i>Click on the menu in the top left corner of the page and select &quot;Orders History&quot;</li>
                             <li><i className="bi bi-bullseye me-2"></i>Click on the order for which you want the contact details</li>
                             <li><i className="bi bi-bullseye me-2"></i>Scroll down you can find the contact details</li>
                           </ul>
@@ -42,7 +43,8 @@ export default function Faqs() {
                       </h2>
                       <div id="collapseTwo" className="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
-                          <i className="bi bi-bullseye me-2"></i>No , it is not possible to avail transport after checkout.                 </div>
+                          <i className="bi bi-bullseye me-2"></i>No, it is not possible to avail transport after checkout.                 
+                        </div>
                       </div>
                     </div>
                     <div className="accordion-item">
@@ -56,10 +58,10 @@ export default function Faqs() {
                           <p>To cancel your order, please follow these steps:</p>
                           <ul>
                             <li><i className="bi bi-bullseye me-2"></i>Go to our website and sign in to your account.</li>
-                            <li><i className="bi bi-bullseye me-2"></i>Click on the menu ,in the top left corner of the page and select "History."</li>
+                            <li><i className="bi bi-bullseye me-2"></i>Click on the menu, in the top left corner of the page and select &quot;History.&quot;</li>
                             <li><i className="bi bi-bullseye me-2"></i>Select your order</li>
-                            <li><i className="bi bi-bullseye me-2"></i>Scroll to the bottom of the page and click on "Cancel Order."</li>
-                            <li><i className="bi bi-bullseye me-2"></i><strong>! Cancellation charges will be applied with respect to the T&C</strong></li>
+                            <li><i className="bi bi-bullseye me-2"></i>Scroll to the bottom of the page and click on &quot;Cancel Order.&quot;</li>
+                            <li><i className="bi bi-bullseye me-2"></i><strong>! Cancellation charges will be applied with respect to the T&amp;C</strong></li>
                           </ul>
                         </div>
                       </div>

@@ -27,7 +27,7 @@ const Loginpage = () => {
         try {
             const response = await login(data)
             console.log("The Token is : ", response)
-            if(response == false){
+            if(response === false){
                 setIsLoggedIn(false)
                 setSubmitSuccess(false)
                 setErrorState(true)
@@ -81,7 +81,7 @@ const Loginpage = () => {
                                 <div className="form-floating mb-3">
                                     <input type="email" className="form-control" id="floatingInput" placeholder="name@example.com" name="username" value={data.username} onChange={handlechange} />
                                     <label htmlFor="floatingInput">Email address</label>
-                                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                                    <div id="emailHelp" className="form-text">We&apos;ll never share your email with anyone else.</div>
                                 </div>
                                 <div className="form-floating">
                                     <input type="password" className="form-control" id="floatingPassword" placeholder="Password" name="password" value={data.password} onChange={handlechange} />
@@ -95,7 +95,7 @@ const Loginpage = () => {
 
                                 {isSubmitting && <p className="text-center">Loading<i className="bi bi-arrow-repeat"></i></p>}
                                 {submitSuccess && <p className="text-center bg-body-secondary fs-5">Successfully Logged in <i className="bi bi-check2-circle"></i></p>}
-                                {errorState && <p className="text-center bg-body-secondary fs-5">Please Enter Valid Credentials<MessageSquareWarning/> </p> }
+                                {errorState && <p className="text-center bg-body-secondary fs-5">Please Enter Valid Credentials <MessageSquareWarning/> </p> }
                                 <div className="modal-footer">
                                     <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                     <button type="submit" className="btn btn-primary">Submit</button>

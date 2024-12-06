@@ -51,6 +51,7 @@ __all__ = [
     "OPENPGPKEY",
     "OPT",
     "PTR",
+    "RESINFO",
     "RP",
     "RRSIG",
     "RT",
@@ -63,6 +64,7 @@ __all__ = [
     "TSIG",
     "TXT",
     "URI",
+    "WALLET",
     "X25",
     "ZONEMD",
 ]

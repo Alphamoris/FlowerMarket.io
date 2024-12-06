@@ -5,17 +5,12 @@ import { PriceDetail, PricePair } from "@/interfaces/interfaces"
 import PleaseLogin from "@/components/PleaseLogin";
 import { useAuth } from "@/components/AuthContext";
 import moment from "moment";
-
-
+import Image from 'next/image'; // Importing Image from next/image
 
 const Prices: React.FC = () => {
 
-
   const [pricePairs, setPricePairs] = useState<PricePair[]>([]);
   const { isLoggedIn, setIsLoggedIn } = useAuth()
-
-  
-
 
   useEffect(() => {
     const fetchPrices = async () => {
@@ -36,14 +31,12 @@ const Prices: React.FC = () => {
           setPricePairs(pairs);
         }
       } catch (error) {
-
         console.error("Error fetching price details:", error);
       }
     };
 
     fetchPrices();
-  }, []);
-
+  }, [setIsLoggedIn]); // Added setIsLoggedIn to the dependency array
 
   return (
     <>
@@ -71,14 +64,14 @@ const Prices: React.FC = () => {
                   </div>
                   <div className="row g-0">
                     <div className="col-md-4">
-                      <img src="/pic1.png" className="img-fluid rounded-start" alt="images" />
+                      <Image src="/pic1.png" className="img-fluid rounded-start" alt="images" width={500} height={300} /> {/* Replaced img with Image */}
                     </div>
                     <div className="col-md-8">
                       <div className="card-body">
                         <h5 className="card-title">{element.detail1.flowname}</h5>
                         <p className="card-text">
-                        {(element.detail1.main_description.split(" ")).slice(0,13).join(" ")+"..."}
-                        <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
+                          {(element.detail1.main_description.split(" ")).slice(0, 13).join(" ") + "..."}
+                          <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail1.price}</h6>
                           <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail1.place}</h6>
                         </p>
                         <p className="card-text">
@@ -119,13 +112,13 @@ const Prices: React.FC = () => {
                     </div>
                     <div className="row g-0">
                       <div className="col-md-4">
-                        <img src="/pic2.png" className="img-fluid rounded-start" alt="images" />
+                        <Image src="/pic2.png" className="img-fluid rounded-start" alt="images" width={500} height={300} /> {/* Replaced img with Image */}
                       </div>
                       <div className="col-md-8">
                         <div className="card-body">
                           <h5 className="card-title">{element.detail2.flowname}</h5>
                           <p className="card-text">
-                            {(element.detail2.main_description.split(" ")).slice(0,15).join(" ")+"..."}
+                            {(element.detail2.main_description.split(" ")).slice(0, 15).join(" ") + "..."}
                             <h6>Price: <i className="bi bi-currency-rupee"></i>{element.detail2.price}</h6>
                             <h6>Place: <i className="bi bi-geo-alt-fill"></i>{element.detail2.place}</h6>
                           </p>

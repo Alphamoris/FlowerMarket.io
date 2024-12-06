@@ -1,3 +1,4 @@
+"use client";
 import LoadingSpinner from '@/components/LoadingSpinner';
 import ProductPage from '@/components/ProductPage';
 import { Suspense } from 'react';
@@ -7,7 +8,7 @@ interface Params {
     id: number;
 }
 
-export default async function SlugPage({ params }: { params: Params }) {
+export default function SlugPage({ params }: { params: Params }) {
 
 
 

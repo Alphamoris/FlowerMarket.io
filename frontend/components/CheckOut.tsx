@@ -12,7 +12,6 @@ interface Id {
 
 const CheckoutForm = ({ id }: Id) => {
 
-
   const [data, setData] = useState<PriceDetail>()
 
   useEffect(() => {
@@ -22,12 +21,11 @@ const CheckoutForm = ({ id }: Id) => {
         setData(response)
       }
       catch (error) {
-        throw new Error("Error is from product page!!!")
+        console.error("Error fetching product details:", error);
       }
     }
     apiCall()
-  }, [])
-
+  }, [id]) // Added 'id' as a dependency
 
   const productPrice = (data?.price || 0);
   const shippingPrice = 10.34;
@@ -228,21 +226,21 @@ const CheckoutForm = ({ id }: Id) => {
                     </div>
                   </div>
 
-                  <button type='button' className="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                  <button type="button" className="btn btn-primary btn-lg w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">
                     Pay <i className="bi bi-currency-rupee"></i>{total.toFixed(2)}
                   </button>
                   <div className="modal fade" id="paymentModal" data-bs-keyboard="false" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                       <div className="modal-content">
                         <div className="modal-header">
-                          <h5 className="modal-title text-danger">Exception<ShieldAlert className='mx-1 mb-1' /></h5>
+                          <h5 className="modal-title text-danger">Exception<ShieldAlert className="mx-1 mb-1" /></h5>
                           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body fw-medium">
                           <p>Our payment gateways are currently experiencing high traffic. We understand how important this is for you and we are working diligently to resolve the issue.
                           </p>
-                          <p>For immediate assistance or further inquiries, please don't hesitate to contact our support team.
-                             <a href={"/help/contactus"} >We're here to help!</a>
+                          <p>For immediate assistance or further inquiries, please do not hesitate to contact our support team.
+                             <a href="/help/contactus" >We&apos;re here to help!</a>
                           </p>
                         </div>
                         <div className="modal-footer">

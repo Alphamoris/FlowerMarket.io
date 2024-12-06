@@ -1,7 +1,8 @@
+"use client";
 import LoadingSpinner from "@/components/LoadingSpinner";
 import { Suspense } from "react";
 
-export default function layout2({
+export default function BulkMarketLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

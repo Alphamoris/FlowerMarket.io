@@ -1,3 +1,4 @@
+"use client";
 import ContactPage from "@/components/ContactPage";
 import { Suspense } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner";
