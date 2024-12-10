@@ -5,13 +5,23 @@ import Loginpage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import Mainheading from "./Mainheading";
 import Logout from "./Logout";
+import React, { useEffect, useRef } from "react";
 import { AuthProvider } from "./AuthContext";
-import CommentToast from "./CommentToast";
 
 export default function Uppernavbar() {
+    const offcanvasRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        // Initialize the ref after component mounts
+        if (typeof window !== 'undefined') {
+            offcanvasRef.current = document.querySelector("#offcanvasWithBothOptions");
+        }
+    }, []);
+
     const onclick1 = () => {
-        const variable = document.querySelector("#offcanvasWithBothOptions")
-        variable?.setAttribute("class", "offcanvas offcanvas-start bg-dark-subtle hide")
+        if (offcanvasRef.current) {
+            offcanvasRef.current.setAttribute("class", "offcanvas offcanvas-start bg-dark-subtle hide");
+        }
     }
 
     return (

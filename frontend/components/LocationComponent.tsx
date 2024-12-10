@@ -1,15 +1,16 @@
-
 "use client"
 
-import Map from "@/components/Map"
+import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+
+// Dynamically import Map component
+const Map = dynamic(() => import('@/components/Map'), { ssr: false });
 
 interface LocationState {
   loaded: boolean;
-  coordinates: { lat: number ; lng: number  };
+  coordinates: { lat: number; lng: number };
   error: { code: number; message: string } | null;
 }
-
 
 const useGeolocation = (): LocationState => {
   const [location, setLocation] = useState<LocationState>({
@@ -19,6 +20,10 @@ const useGeolocation = (): LocationState => {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
     if (!("geolocation" in navigator)) {
       setLocation({
         loaded: true,
@@ -60,30 +65,32 @@ const useGeolocation = (): LocationState => {
 
 const LocationComponent: React.FC = () => {
   const location = useGeolocation();
-  let latitude : number | null = location.coordinates.lat
-  let longitude : number | null = location.coordinates.lng
+
+  if (typeof window === 'undefined') {
+    return null; // Return null during server-side rendering
+  }
+
+  let latitude: number | null = location.coordinates.lat
+  let longitude: number | null = location.coordinates.lng
+
   return (
-    <>
-      {/* <h2>User Location</h2>
+    <div>
       {location.loaded ? (
         <>
           {location.error ? (
-            <p>Error: {location.error.message}</p>
+            <div>Error: {location.error.message}</div>
           ) : (
-            <p>
-              Latitude: {latitude}, Longitude: {longitude}
-            </p>
+            <Map
+              center={[latitude, longitude]}
+              zoom={3}
+            />
           )}
         </>
       ) : (
-        <p>Loading location...</p>
-      )} */}
-      <Map center={[latitude,longitude]} zoom={3} />
-    </>
+        <div>Getting location...</div>
+      )}
+    </div>
   );
 };
 
-
 export default LocationComponent;
-
-

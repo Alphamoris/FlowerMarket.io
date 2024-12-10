@@ -1,37 +1,28 @@
+version: '3.9'
+
 services:
   db:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.db
-      args:
-        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-        POSTGRES_DB: ${DATABASE_NAME}
-        POSTGRES_USER: ${DATABASE_USERNAME}
+    image: alphamoris/flowermarket.io:db
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_USER: ${DATABASE_USERNAME}
       PGDATA: /var/lib/postgresql/data
-    ports:
-      - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-    restart: always
+    networks:
+      - my-network
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DATABASE_USERNAME}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    deploy:
+      restart_policy:
+        condition: on-failure
 
   backend:
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-    depends_on:
-      db:
-        condition: service_healthy
+    image: alphamoris/flowermarket.io:backend
     environment:
       DATABASE_HOSTNAME: db
       DATABASE_PORT: 5432
@@ -41,8 +32,10 @@ services:
       SECRET_KEY: ${SECRET_KEY}
       ALGORITHM: ${ALGORITHM}
       EXPIRATION_TIME: ${EXPIRATION_TIME}
+    ports:
+      - "8000:8000"
     env_file:
-      - ./backend/.env
+      - ./.env
     restart: always
     command: >
       bash -c "
@@ -51,16 +44,42 @@ services:
         python -m app.init_data
         uvicorn app.main:app --host 0.0.0.0 --port 8000
       "
+    deploy:
+      restart_policy:
+        condition: on-failure
+    logging:
+      driver: json-file
+      options:
+        labels: 'com.example.logging'
+        env: 'os,customer'
+        compress: 'false'
+        max-file: '2'
+        max-size: '10m'
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - my-network
 
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+    image: alphamoris/flowermarket.io:frontend
     ports:
-      - "3000:3000"
+      - "80:80"
     depends_on:
       - backend
+    networks:
+      - my-network
     restart: always
+    deploy:
+      restart_policy:
+        condition: on-failure
 
 volumes:
   db-data:
+
+networks:
+  my-network:
+    driver: bridge
+    attachable: true
+
+

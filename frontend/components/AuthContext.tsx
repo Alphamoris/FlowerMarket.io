@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 type AuthContextType = {
@@ -8,24 +10,26 @@ type AuthContextType = {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  // Initialize state with a function to avoid unnecessary rerenders
-  const [isLoggedIn, setIsLoggedIn] = useState(() => {
-    // Check localStorage during initialization
-    if (typeof window !== 'undefined') { // Check for browser environment
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Only access localStorage on the client side
+    if (typeof window !== 'undefined') {
+      setMounted(true);
       const storedStatus = localStorage.getItem("LoginStatus");
       if (!storedStatus) {
         localStorage.setItem("LoginStatus", "false");
-        return false;
+      } else {
+        setIsLoggedIn(storedStatus === "true");
       }
-      return storedStatus.toLowerCase() === "true";
     }
-    return false;
-  });
+  }, []);
 
-  // Handle synchronization with localStorage
-  useEffect(() => {
-    localStorage.setItem("LoginStatus", String(isLoggedIn));
-  }, [isLoggedIn]);
+  // Don't render children until after client-side hydration
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>

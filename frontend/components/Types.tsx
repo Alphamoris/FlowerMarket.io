@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image"
 import Link from "next/link"
 import React, { useState, useEffect } from "react";
@@ -5,14 +7,20 @@ import { TypesI } from "@/interfaces/interfaces";
 import { getTypesDetails } from "@/apilib/Apilib";
 import PleaseLogin from "@/components/PleaseLogin";
 import { useAuth } from "@/components/AuthContext";
-import TypesToast from "./TypesToast";
+import dynamic from 'next/dynamic';
 
+// Dynamically import TypesToast with no SSR
+const TypesToast = dynamic(() => import('./TypesToast'), {
+    ssr: false
+});
 
 const Types: React.FC = () => {
     const [data, setData] = useState<TypesI[]>([]);
+    const [mounted, setMounted] = useState(false);
     const { isLoggedIn, setIsLoggedIn } = useAuth();
 
     useEffect(() => {
+        setMounted(true);
         const fetchData = async () => {
             try {
                 const result: TypesI[] | any = await getTypesDetails();
@@ -28,7 +36,11 @@ const Types: React.FC = () => {
             }
         };
         fetchData();
-    }, [setIsLoggedIn]); // Added setIsLoggedIn to the dependency array
+    }, [setIsLoggedIn]);
+
+    if (!mounted) {
+        return null; // or a loading spinner
+    }
 
     return (
         <>

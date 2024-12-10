@@ -1,10 +1,16 @@
 "use client"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap/dist/js/bootstrap.bundle.min";
+
 import Link from 'next/link';
+import { useEffect } from 'react';
 
 export default function Navbar() {
+
+    useEffect(() => {
+        require("bootstrap/dist/js/bootstrap.bundle.min");
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary navclr" id="mark">
             <div className="container-fluid">

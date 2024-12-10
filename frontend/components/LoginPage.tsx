@@ -1,3 +1,5 @@
+"use client";
+
 import { Token, UserCrd } from "@/interfaces/interfaces"
 import React, { useState } from "react"
 import { login } from "@/apilib/Apilib"
@@ -18,6 +20,7 @@ const Loginpage = () => {
     const [submitSuccess, setSubmitSuccess] = useState<boolean>(false)
     const { setIsLoggedIn , isLoggedIn } = useAuth();
 
+
     
     const handlesubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -33,7 +36,9 @@ const Loginpage = () => {
                 setErrorState(true)
             }
             else{
-                localStorage.setItem("LoginStatus","true")
+                if (typeof window !== 'undefined') {
+                    localStorage.setItem("LoginStatus","true")
+                }
                 setIsLoggedIn(true)
                 setSubmitSuccess(true)
                 setErrorState(false)
@@ -105,7 +110,7 @@ const Loginpage = () => {
                     </div>
                 </div >
             </div >
-        </>
+        </ >
     )
 }
 

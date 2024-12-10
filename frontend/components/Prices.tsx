@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import { getPriceDetails } from "@/apilib/Apilib";
 import React, { useEffect, useState } from "react";

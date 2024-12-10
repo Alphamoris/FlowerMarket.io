@@ -1,11 +1,24 @@
-"use client"
-import React, { useState } from 'react';
-import { useAuth } from './AuthContext';
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { AlertOctagon, LineChartIcon, LinkIcon } from 'lucide-react';
+import { AlertOctagon } from 'lucide-react';
 
 const TypesToast = () => {
     const [show, setShow] = useState(true);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+        // Initialize Bootstrap toast if needed
+        if (typeof window !== 'undefined') {
+            require('bootstrap');
+        }
+    }, []);
+
+    if (!mounted) {
+        return null;
+    }
 
     return (
         <div className="toast-container position-fixed bottom-0 end-0 p-3">
@@ -26,8 +39,12 @@ const TypesToast = () => {
                     ></button>
                 </div>
                 <div className="toast-body bg-warning-subtle text-secondary">
-                <p>This page shows only the available flowers,</p>
-                To see prices and place your order, visit the <Link href={"/prices"}><i className="bi bi-link-45deg fs-5"></i>Price</Link> section.
+                    <p className="mb-2">This page shows only the available flowers,</p>
+                    To see prices and place your order, visit the{' '}
+                    <Link href="/prices" className="text-decoration-none">
+                        <i className="bi bi-link-45deg fs-5"></i>Price
+                    </Link>{' '}
+                    section.
                 </div>
             </div>
         </div>

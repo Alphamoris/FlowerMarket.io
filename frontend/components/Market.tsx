@@ -1,7 +1,11 @@
-import Map from "@/components/Map"
-import LocationComponent from "./LocationComponent"
-import "../styles/mainstyle.css"
+"use client";
 
+import dynamic from 'next/dynamic';
+import Map from "@/components/Map"
+import "../styles/mainstyle.css";
+
+// Dynamically import LocationComponent with no SSR
+const LocationComponent = dynamic(() => import('./LocationComponent'), { ssr: false });
 
 export default function Market() {
 
