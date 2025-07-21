@@ -2,6 +2,7 @@
 
 
 
+
 "use client"
 
 import Prices from "@/components/Prices";
